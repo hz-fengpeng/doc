@@ -1,0 +1,95 @@
+@startuml
+
+class AVFormatContext{
+    //音视频容器格式有关
+   const struct AVInputFormat *iformat;
+   const struct AVOutputFormat *oformat;
+   AVIOContext *pb;
+   unsigned int nb_streams;  // 流的个数
+   AVStream **streams;      // 里面有AVCodecContext，编解码信息
+   void *priv_data; // 各种格式的私有数据,从AVInputFormat中拷贝，如MOVContext*, WAVDemuxContext*
+   const AVCodec *video_codec; // 视频解码器
+   const AVCodec *audio_codec;  // 音频解码器
+   int (*io_open)(struct AVFormatContext *s, AVIOContext **pb, const char *url,
+                   int flags, AVDictionary **options);// 默认为io_open_default,打开文件函数
+    
+    void (*io_close)(struct AVFormatContext *s, AVIOContext *pb); // 默认为io_close_default函数，文件关闭函数
+}
+
+class AVInputFormat{
+    // 输入的容器格式相关
+    const char *name;
+    const char *extensions;
+    int priv_data_size; //格式的私有数据，如sizeof(MOVContext)
+    const AVClass *priv_class;  //私有类，如mov_class
+    int (*read_probe)(const AVProbeData *);
+    int (*read_header)(struct AVFormatContext *);
+}
+
+class AVIOContext{
+    //管理输入输出数据的结构,可通过URLContext生成
+    void *opaque; // URLContext指针
+    unsigned char *buffer;  /**< Start of the buffer. */
+    int buffer_size;        /**< Maximum buffer size */   // 根据URLContext得到
+    int (*read_packet)(void *opaque, uint8_t *buf, int buf_size);   // 初始化为ffurl_read, 最后会调用URLProtocol中的url_read
+    int (*write_packet)(void *opaque, uint8_t *buf, int buf_size);  // 初始化为ffurl_write
+    int64_t (*seek)(void *opaque, int64_t offset, int whence);      // 初始化为ffrul_seek
+}
+
+class URLContext{
+' 找到URLProtocol后，分配新的URLContext, 将URLProtocol的值赋值给URLContext
+    void *priv_data;//用于存储各种协议的数据，\n比如FILE文件时保存FileContext，里面存放了文件指针
+    const struct URLProtocol *prot;
+}
+
+class URLProtocol{
+    '封装各种协议的基本操作如 FILE*，UDP，RTP
+    int     (*url_open)( URLContext *h, const char *url, int flags);
+    int     (*url_read)( URLContext *h, unsigned char *buf, int size);
+    int     (*url_write)(URLContext *h, const unsigned char *buf, int size);
+    int     (*url_close)(URLContext *h);
+}
+
+class AVStream{
+    '存储每一个视频/音频流信息的结构体
+    int index; // 标识该视频/音频流
+    int id;
+    void *priv_data;  // 指向该视频/音频流的AVCodecContex
+    AVRational time_base; // 时基
+    AVDictionary *metadata; // 元数据
+    AVRational avg_frame_rate;  // 帧率
+    AVPacket attached_pic; // 附带的图片
+    AVCodecParameters *codecpar; // 编解码参数, 声道数，编码值，采样率等
+    AVStreamInternal *internal; // 里面有AVCodecContext
+}
+
+class AVCodecContext{
+    '编解码器信息，根据AVCodec进行赋值
+    const struct AVCodec  *codec;
+    void *priv_data;    // 编解码器私有数据
+    int channels;   // 音频通道
+    int sample_rate;    // 采样率
+    enum AVSampleFormat sample_fmt;  ///< sample format
+
+}
+
+class AVCodec{
+    '编解码器，与AVCodecContext对应
+     int (*init)(struct AVCodecContext *);  // 编码器初始化
+      int (*decode)(struct AVCodecContext *avctx, void *outdata,
+                  int *got_frame_ptr, struct AVPacket *avpkt);  // 解码
+
+}
+
+class AVPacket{
+    '存储压缩编码数据相关信息
+    uint8_t *data; // 压缩编码的数据，可能不是
+    int   size; // 数据大小
+}
+
+class AVFrame{
+    //AVPacket解码后生成AVFrame, 用于存储原始数据
+    uint8_t *data[AV_NUM_DATA_POINTERS];
+}
+
+@enduml
