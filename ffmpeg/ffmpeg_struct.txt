@@ -1,6 +1,7 @@
 @startuml
 
 class AVFormatContext{
+    const AVClass *av_class;
     //音视频容器格式有关
    const struct AVInputFormat *iformat;
    const struct AVOutputFormat *oformat;
@@ -93,3 +94,21 @@ class AVFrame{
 }
 
 @enduml
+
+ffmpeg中的结构体成功管理系统
+AVClass, AVOption
+AVClass 放在结构体的第一个位置。调用av_opt_set或av_opt_get来进行结构体里字段的赋值。
+主要是根据传入的参数，找到该参数在结构体中的位置，最后进行赋值。
+
+avctx->priv_data = av_mallocz(codec->priv_data_size);
+*(const AVClass **)avctx->priv_data = codec->priv_class;
+以h264_nvenc编码器为例，在上层是这样赋值给私有指针priv
+(const AVClass*)s->priv_data = codec->priv_class;
+其中s是结构体AVCodecContext，codec是结构体AVCodec，codec->priv_class是h264_nvenc_class,这个class关键是保存了options信息
+
+根据偏移量，也就是记录NvencContext 每个成员的相对偏移地址，并在这个地址进行赋值操作，然后在具体的底层（插件）代码中：
+NvencContext *ctx = avctx->priv_data;
+这样就确定了NvencContext每个成员 相对的地址的偏移量，每个NvencContext 的数据成员值就确定了
+
+内核+插件
+
