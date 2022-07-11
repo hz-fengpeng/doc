@@ -112,3 +112,124 @@ NvencContext *ctx = avctx->priv_data;
 
 内核+插件
 
+@startuml
+
+'AVPacket和AVFrame内部都封装了AVBufferRef
+'AVBufferRef真正存储数据的是AVBuffer
+'AVBuffer的data是真正存数据的，refcount是引用计数
+
+AVBuffer <|-- AVBufferRef
+AVBufferRef <|-- AVPacket
+AVBufferRef <|-- AVFrame
+
+class AVBuffer
+{
+    uint8_t *data
+    size_t size;
+    atomic_uint refcount; // 引用计数
+
+}
+
+class AVBufferRef
+{
+    AVBuffer *buffer;
+    uint8_t *data;  // == AVBuffer::data 
+    int size;
+}
+
+class AVPacket
+{
+
+    AVBufferRef *buf; // 管理引用计数
+    uint8_t *data;  // == AVBuffer::data 
+    int64_t pts;  //显示时间
+    int64_t dts;  //解码时间
+    int   size;   // 包大小 
+    int64_t duration;  // 数据时长
+    int64_t pos;  // 在流媒体中的位置
+}
+
+class AVFrame
+{
+    AVBufferRef *buf[AV_NUM_DATA_POINTERS];
+}
+
+@enduml
+
+```
+
+不同的AVPacket有自己的AVBufferRef，但可能共用AVBuffer
+对于多个AVPacket共享同一个缓存空间， FFmpeg使用的引用计数的机制（reference-count） ：
+
+初始化引用计数为0，只有真正分配AVBuffer的时候，引用计数初始化为1;
+当有新的Packet引用共享的缓存空间时， 就将引用计数+1；
+当释放了引用共享空间的Packet，就将引用计数-1；引用计数为0时，就释放掉引用的缓存空间AVBuffer。
+AVFrame也是采用同样的机制
+
+```
+
+AVPacket *av_packet_alloc(void);	分配AVPacket，这个时候和buffer没有关系, 和AVBufferRef没关系
+void av_init_packet(AVPacket *pkt);	初始化AVPacket，只是单纯初始化pkt字段， 和AVBufferRef没关系
+
+int av_new_packet(AVPacket *pkt, int size);	给AVPacket的AVBufferRef分配内存， 引用计数初始化为1
+
+int av_packet_ref(AVPacket *dst, const AVPacket *src);	增加引用计数
+
+void av_packet_unref(AVPacket *pkt);	释放AVBufferRef，减少引用计数, 如果计数减到1
+
+void av_packet_move_ref(AVPacket *dst, AVPacket *src);	转移引用计数，同时初始化src
+AVPacket *av_packet_clone(const AVPacket *src);	等于av_packet_alloc()+av_packet_ref()
+
+void av_packet_free(AVPacket **pkt);	释放AVPacket和_alloc对应
+
+
+读包时，只需要调用av_packet_alloc，然后调用av_read_frame来取包。不需要考虑AVBufferRef。
+
+
+ 
+
+@startuml
+
+class MyAVPacketList
+{
+    AVPacket *pkt; // 放的是指针
+    int serial;
+}
+
+class AVFifoBuffer
+{   // 队列
+    uint8_t *buffer;
+    uint8_t *rptr, *wptr, *end;
+    uint32_t rndx, wndx;
+}
+
+class PacketQueue
+{
+    AVFifoBuffer *pkt_list;
+    int nb_packets;
+    int size;
+    int64_t duration;
+    int abort_request;
+    int serial;
+}
+@enduml
+ffmpeg中的packet队列
+AVPacket队列  int packet_queue_put(PacketQueue *q, AVPacket *pkt)
+在函数里调用av_packet_alloc生成pkt1, 然后调用av_packet_move_ref, 将pkt移动到pkt1.
+此时，pkt里的AVBufferRef设置为NULL
+
+
+
+AVFrame常用API
+函数原型	说明
+AVFrame *av_frame_alloc(void);	分配AVFrame
+void av_frame_free(AVFrame **frame);	释放AVFrame
+int av_frame_ref(AVFrame *dst, const AVFrame *src);	增加引用计数
+void av_frame_unref(AVFrame *frame);	减少引用计数
+void av_frame_move_ref(AVFrame *dst, AVFrame *src);	转移引用计数
+int av_frame_get_buffer(AVFrame *frame, int align);	根据AVFrame分配内存
+AVFrame *av_frame_clone(const AVFrame *src);	等于av_frame_alloc()+av_frame_ref()
+
+对于视频（Video）来说，AVPacket通常包含一个压缩的Frame；
+而音频（Audio）则有可能包含多个压缩的Frame。
+并且，一个packet也有可能是空的，不包含任何压缩数据data，只含有边缘数据side data
