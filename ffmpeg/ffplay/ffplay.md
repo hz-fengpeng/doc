@@ -8,3 +8,17 @@ packet读取线程 read_thread()，不断从文件读取pakcet，然后根据pac
 字幕解码线程 subtitle_thread()，不断从字幕pakcet队列拿到 packet，然后解码出frame，插进去 字幕frame队列。
 
 3. stream_component_open, 开启解码线程
+
+
+ffplay跨线程传递包：
+    read_thread启动时，传入的 VideoState *is 作为线程的参数，里面有 音频packet队列,视频packet队列,字幕packet队列。
+    调用packet_queue_put来向队列中放包。read_thread线程放包时会加锁
+    ```
+        SDL_LockMutex(q->mutex);
+        ret = packet_queue_put_private(q, pkt1);
+        SDL_UnlockMutex(q->mutex);
+    ```
+
+    音频解码线程，视频解码线程，字幕解码线程 会调用packet_queue_get从队列中取包
+    也会加锁
+    

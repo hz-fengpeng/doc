@@ -44,7 +44,7 @@ class RTPTCPTransmitter{
 
 ```
 
-- RTPTransmitter在create的时候申请socket，进行绑定等工作，负责数据收发和接受 ```int RTPUDPv4Transmitter::Poll()```,将收到的数据生成RTPRawPacket, 放到```std::list<RTPRawPacket*> rawpacketlist;```
+- RTPTransmitter在create的时候申请socket，（该socket还是阻塞的）进行绑定等工作，负责数据收发和接受 ```int RTPUDPv4Transmitter::Poll()```,将收到的数据生成RTPRawPacket, 放到```std::list<RTPRawPacket*> rawpacketlist;```
 - ```RTPSession::ProcessPolledData()``` poll 之后进行ProcessPolledData，```RTPSources::ProcessRawPacket``` 根据RTPRawPacket生成RTPPacket-->```RTPSources::ProcessRTPPacket```--> ```RTPInternalSourceData::ProcessRTPPacket```
   -> 在收到数据时，RTPTransmitter会把收到的包根据ssrc分到RTPSources里的RTPInternalSourceData，每一个源都对应一个RTPInternalSourceData。```std::list<RTPPacket *> packetlist;```
   
@@ -93,7 +93,7 @@ class RTPSessionSources{
 
 JThread start函数会调用pthread函数，将TheThread传入pthread函数。其中最终启动 虚函数 Thread(),由继承类实现
 
-RTPSession::Poll()
+RTPSession::Poll() 起线程来拉数据
 ```plantuml
 
 JThread <|-- RTPPollThread
