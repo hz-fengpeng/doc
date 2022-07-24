@@ -85,7 +85,7 @@ class RtcServerAdapter{
 }
 
 class SrsServer{
-    - std::vector<**SrsListener**> listeners;
+    - std::vector<**SrsListener***> listeners;
     - SrsResourceManager* conn_manager; // 每个rtmp连接 SrsRtmpConn
 }
 ```
@@ -96,6 +96,14 @@ SrsSTCoroutine::start --> impl_::start -->SrsFastCoroutine::start-->SrsFastCorou
 
 使用imp主要是防止修改了SrsFastCoroutine后导致需要编译很多文件。
 
+
+srs协程的设计与Listen类差不多，
+
+1. SrsRecvThread, SrsServer, SrsRtmpConn里都有
+   协程指针，
+2. 协程里传入ISrsCoroutineHandler来标识包含协程指针的类。通过ISrsCoroutineHandler来执行SrsRecvThread，SrsServer，SrsRtmpConn中的cycle()函数。
+
+
 ```plantuml 
 ISrsStartable <|-- SrsCoroutine
 SrsCoroutine <|-- SrsSTCoroutine
@@ -103,6 +111,7 @@ SrsFastCoroutine  *-- SrsSTCoroutine
 ISrsCoroutineHandler *-- SrsFastCoroutine
 ISrsCoroutineHandler <|-- SrsRecvThread
 ISrsCoroutineHandler <|-- SrsServer
+ISrsCoroutineHandler <|-- SrsRtmpConn
 
 interface ISrsStartable{
    'Start the object, generally a croutine.
@@ -145,11 +154,11 @@ class SrsFastCoroutine{
 }
 
 class SrsRecvThread{
-
+    SrsCoroutine* trd;
 }
 
 class SrsServer{
-
+    SrsCoroutine* trd;
 }
 
 ```
@@ -170,6 +179,8 @@ class SrsServer{
 
 ```plantuml 
 
+SrsListener <|-- SrsHttpFlvListener
+SrsListener <|-- SrsUdpStreamListener
 SrsListener <|-- SrsBufferListener
 ISrsTcpHandler <|-- SrsBufferListener
 ISrsTcpHandler *-- SrsTcpListener
@@ -202,12 +213,33 @@ class SrsTcpListener{
 
 }
 
+class SrsUdpListener{
+
+}
+
 ```
+
+Listen类的设计：
+    1. SrsServer 可能有许多监听。用一个vector维护.
+   ```
+    // All listners, listener manager.
+    std::vector<SrsListener*> listeners;
+   ```
+   所以这个listen监听类设计成 基类。
+   SrsHttpFlvListener, SrsUdpStreamListener,SrsBufferListener,是其的子类。
+
+   2. 这些子类内部使用的tcp或udp处理连接有共同的地方，SrsTcpListener和SrsUdpListener，这两个类来真正干活。
+
+    3. listen监听子类与 SrsTcpListener或SrsUdpListener产生联系：
+       1. listen监听子类里含有SrsTcpListener的指针。
+       2. listen监听子类又继承统一的接口，SrsTcpListener成员中含有这个接口指针，在有连接时，调用该接口函数。
 
 ``` plantuml
 
 ISrsStartableConnection <|-- SrsHttpApi
 ISrsStartableConnection <|-- SrsRtmpConn
+ISrsStartableConnection <|-- SrsResourceManager
+
 ISrsResource <|-- ISrsConnection
 ISrsConnection <|-- ISrsStartableConnection
 ISrsStartable <|-- ISrsStartableConnection
@@ -221,6 +253,12 @@ interface ISrsResource
     virtual std::string desc() = 0;
 
 
+}
+
+class SrsResourceManager
+{
+    SrsCoroutine* trd;
+    std::vector<ISrsResource*> conns_;  //The connections without any id.
 }
 
 interface ISrsConnection
@@ -270,6 +308,10 @@ wg.wait()，真正开始切换上下文，让之前创建的协程全部跑起�
 
 代码运行到 wg.wait() 的时候，之前的协程已经开始跑起来
 
+连接管理：
+    来一个请求，根据类型生成一个ISrsStartableConnection放到SrsServer中的conn_manager中。
+
+    在连接接收后从中移除
 
 #### SrsRtmpConn 连接协程cycle
 
@@ -278,8 +320,10 @@ wg.wait()，真正开始切换上下文，让之前创建的协程全部跑起�
 
 ISrsProtocolReader <|-- ISrsProtocolReadWriter
 ISrsProtocolWriter <|-- ISrsProtocolReadWriter
+ISrsProtocolReadWriter <|-- SrsSslConnection
 
 ISrsProtocolReadWriter *-- SrsRtmpServer
+ISrsProtocolReadWriter *-- SrsProtocol
 ISrsProtocolReadWriter <|-- SrsTcpConnection
 ISrsProtocolReadWriter <|-- SrsStSocket
 SrsProtocol *-- SrsRtmpServer
@@ -326,15 +370,30 @@ class SrsProtocol
 {
     // 用于解析rtmp协议，和发送
     ISrsProtocolReadWriter* skt;  // 就是SrsTcpConnection
+    
+    SrsFastStream* in_buffer;  // 用于存放skt接收的数据
+}
+
+class SrsRtmpConn
+{
+    SrsTcpConnection* skt;
+    SrsRtmpServer* rtmp;
+    SrsServer* server;
 }
 
 ```
+
+一个SrsRtmpConn中有一个SrsRtmpServer，用于与客户端通信，SrsRtmpServer::SrsProtocol主要是rtmp协议相关，ISrsProtocolReadWrite主要是io相关发送接收数据
+
 SrsRtmpConn::cycle()
     SrsRtmpConn:do_cycle()
 
     SrsRtmpConn::SrsRtmpServer成员主要来进行rtmp协商
         rtmp->handshake()   // 3次握手
-        握手时主要是通过SrsTcpConnection中的SrsStSocket来进行读取tcp数据。
+        握手时主要是通过SrsTcpConnection中的SrsStSocket来进行读取tcp数据，握手时没有用的SrsProtocol.
+
+        read_fully(): 读1537个字节, c0c1
+        io->write(): 发送s0s1s2
     
 
         代码跑到这里的时候，客户端已经开始发 connect 指令，如下图抓包：connect_app() 函数做的事情就是 把 客户端的 connect 请求的信息提取出来，放到 req 变量
@@ -351,6 +410,19 @@ SrsRtmpConn::cycle()
 
 
 
+#### Srs中的超时处理
+- 有新连接时，SrsRtmpConn来接收客户端握手消息时
+  ```
+    SrsRtmpConn::do_cycle()
+        rtmp->set_recv_timeout(SRS_CONSTS_RTMP_TIMEOUT);
+        rtmp->set_send_timeout(SRS_CONSTS_RTMP_TIMEOUT);
+
+    调用io->read_fully，来读取固定的长度大小的tcp数据，利用poll的超时机制来处理
+    
+    普通read也是，利用poll的超时
+  ```
+
+- 在推流收数据包时，SrsRtmpConn线程有设置一段时间后来统计收到的包是否增加。
 
 #### 推流
 srs_error_t SrsRtmpConn::publishing(SrsLiveSource* source)
@@ -358,7 +430,10 @@ srs_error_t SrsRtmpConn::publishing(SrsLiveSource* source)
 
 ```
 // Global singleton instance.
-extern SrsLiveSourceManager* _srs_sources;
+extern SrsLiveSourceManager* _srs_sources; 居然是全局变量。
+ // std::map<std::string, SrsLiveSource*> pool;
+
+ SrsLiveSource里有一个 SrsLiveConsumer列表，有Gop
 ```
 
 ```plantuml
@@ -376,6 +451,10 @@ class SrsLiveConsumer
 
     SrsMessageQueue* queue;  // 包的队列
     SrsLiveSource* source;
+
+    SrsRtmpJitter* jitter;  // 抖动算法
+
+    srs_cond_t mw_wait;  // 条件变量
 }
 
 class SrsLiveSourceManager
@@ -388,7 +467,7 @@ class SrsLiveSourceManager
 根据type类型选择推流还是拉流 。SrsRtmpConnFMLEPublish：ffmpeg类型推流。``` srs_error_t SrsRtmpConn::publishing(SrsLiveSource* source)```
 
 rtmp协商完成后，会开启一个协程进行收发数据 ```SrsRecvThread::cycle()```
-同时协商协程会记录一些数据。
+同时协商协程```SrsRtmpConn::do_publishing```会记录一些数据, 如果一段时间没有包会断开连接。
  
 
 ```plantuml
@@ -408,21 +487,35 @@ class SrsRecvThread
 
 class SrsQueueRecvThread
 {
-    std::vector<SrsCommonMessage*> queue;
+    std::vector<SrsCommonMessage*> queue;  // 拉流时收到客户端的消息
     SrsRecvThread trd;
 }
 
 ```
+
+SrsPublishRecvThread和SrsQueueRecvThread里都有
+SrsRecvThread，它们都继承自ISrsMessagePumper。两个协程收到包时相应的处理不同。通过ISrsMessagePumper来处理。
+
+
+
 ```
+在客户端推流时，SrsRecvThread用于接收客户端的数据。
+主要的就是收到一个包，把包放到每个SrsLiveSource中的SrsLiveConsume里的queue里。
+
 SrsRecvThread::cycle()
     SrsRecvThread::do_cycle()
 
         rtmp->recv_message(&msg) //处理收到的消息
         pumper->consume(msg); //数据读取出来后去消费这个数据
+
+        SrsCommonMessage* msg
+
             SrsRtmpConn::handle_publish_message
                 SrsRtmpConn::process_publish_message
                     SrsLiveSource::on_video_imp
                     
+                    SrsCommonMessage* msg -> SrsSharedPtrMessage msg
+
                     for (int i = 0; i < (int)consumers.size(); i++) {
                         SrsLiveConsumer* consumer = consumers.at(i);
                         if ((err = consumer->enqueue(msg, atc, jitter_algorithm)) != srs_success) {
@@ -443,6 +536,13 @@ SrsRecvThread::cycle()
 ```plantuml
 
 SrsSharedPtrPayload *-- SrsSharedPtrMessage
+
+class SrsCommonMessage
+{
+    SrsMessageHeader header; // 报文头
+    int size;
+    char* payload;  // 数据
+}
 
 class SrsSharedPtrPayload
 {
@@ -478,27 +578,120 @@ class SrsGopCache
     SrsGopCache::cache(SrsSharedPtrMessage* shared_msg)
 }
 
+class SrsFastStream
+{
+    char* p;   // ptr to the current read position. 已经读取的消息的指针头
+    char* end;  // ptr to the content end.
+    char* buffer;    // ptr to the buffer.
+    int nb_buffer;   // the size of buffer.
+}
+
 
 ```
 
-SrsRtmpConn::playing
-source->consumer_dumps(consumer)
+
+- rtmp握手期间，直接解析c0c1c2, s0s1s2
+```
+SrsProtocol::recv_message
+    SrsProtocol::recv_interlaced_message
+    通过SrsProtocol来生成SrsCommonMessage.
+
+```
+- 客户端推流，通过SrsProtocol将收到数据封装成 SrsCommonMessage
+- 调用SrsSharedPtrMessage::create(),从SrsCommonMessage里生成SrsSharedPtrMessage
+  - create完成后，会将SrsCommonMessage里的指针置NULL，防止二次释放。
+- consumer->enqueue，将SrsSharedPtrMessage放入到消费者的SrsMessageQueue里
+- 拉流时，SrsLiveConsumer::dump_packets -> queue->dump_packets, 将SrsMessageQueue里的SrsSharedPtrMessage取出来，全部取出来。放到SrsMessageArray里。
+- rtmp->send_and_free_messages。将SrsSharedPtrMessage发送给客户端，同时将SrsSharedPtrMessage释放。
+
+读数据主要通过SrsFastStream类来进行读取数据。
+使用协程可以方便的处理一次read时数据不够的问题。
+
+最后是通过memcpy将SrsFastStream里的buffer copy到
+SrsCommonMessage中的。
 
 #### 拉流
 
 ```
+在拉流过程中，也是新起一个协程来接收客户端的一些通信信息。
+
 SrsRtmpConn::cycle()协程
     SrsRtmpConn::service_cycle
         stream_service_cycle();
-            playing(source)
-                : 创建SrsLiveConsumer
+            playing(source), 这个source也是从_srs_sources取的，如果这时候没有这个流呢。
+                : 创建SrsLiveConsumer, source->create_consumer(consumer)
                 : SrsLiveSource::consumer_dumps, gop_cache->dump, 将gop中的缓存全部给client
 
                 :SrsRtmpConn::do_playing, 主协程统计一些信息,并且发送给客户端
+                    : consumer->dump_packets
+                    : rtmp->send_and_free_messages
 
                 :新起一个协程来接收客户端的消息。
 
+```
 
 
+#### 线程同步
+在 Linux 系统使用 多线程的时候，线程间通信，可以使用 条件变量 以及 互斥锁。例如 线程 A 是生产者，不断写入任务到队列，线程 B 是消费者，不断从队列读取任务，没有任务的时候，线程B会阻塞，等待 线程A通知。这个通知就需要用到 条件变量 以及 互斥锁。
 
 ```
+
+#include <stdio.h>
+#include <memory.h>
+#include "st.h"
+#include "../common.h"
+_st_cond_t *cond_name;
+_st_mutex_t* mutex_name;
+char name[100] = {};
+​
+void *publish(void *arg) {
+    st_usleep(2 * 1000000LL);
+    st_cond_signal(cond_name);   // 唤醒消费者
+​
+    strcpy(name,"Loken");
+    st_utime_t time_now = st_utime();
+    printf("Pulish name %lld\r\n", time_now);
+​
+    return NULL;
+}
+
+void *consume(void *arg) {
+    st_mutex_lock(mutex_name);
+    st_cond_wait(cond_name);    // 等待唤醒
+    st_mutex_unlock(mutex_name);
+​
+    st_utime_t time_now = st_utime();
+    printf("Consume name %s , %lld\r\n",name, time_now);
+    return NULL;
+}
+
+int main(int argc, char *argv[]) {
+    cond_name = st_cond_new();  // 生成cond
+    mutex_name = st_mutex_new();  // 生成mutex
+    st_init();
+​
+    st_utime_t time_now = st_utime();
+    printf("start %lld\r\n", time_now);
+​
+    st_thread_create(publish, NULL, 0, 0);
+    st_thread_create(consume, NULL, 0, 0);
+    st_thread_create(consume, NULL, 0, 0);
+    st_thread_create(consume, NULL, 0, 0);
+​
+    st_thread_exit(NULL);
+​
+    /* NOTREACHED */
+    return 1;
+}
+​
+```
+
+每个SrsLiveConsumer中含有一个条件变量```mw_wait = srs_cond_new();```
+
+consumer->wait(mw_msgs, mw_sleep); 
+    srs_cond_wait(mw_wait);
+等待生产者唤醒。
+
+生产者队列中有数据时```srs_cond_signal(mw_wait);```
+
+

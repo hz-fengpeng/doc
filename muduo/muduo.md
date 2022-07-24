@@ -5,32 +5,13 @@
 
 ``` plantuml
 
-class TcpServer
-{
-    Acceptor acceptor_;
-    EventLoopThreadPool threadPool_;
-    ConnectionCallback connectionCallback_;
-    MessageCallback messageCallback_;
-    EventLoop* loop_;
-    ConnectionMap connections_;  // map<string, TcpConnectionPtr>
-}
-
+title Reactor事件处理
 class EventLoop
 {
     Poller poller_;
-}
+    TimerQueue timerQueue_;  //超时管理
 
-class Acceptor
-{
-    // 用于tcp连接
-    Channel acceptChannel_;
-    Socket acceptSocket_;
-}
-
-class socket
-{   
-    //tcp listen时的监听socket
-    const int sockfd_;
+    EventLoop::loop()
 }
 
 class Channel
@@ -42,13 +23,102 @@ class Channel
     EventLoop* loop_; // 属于哪个eventloop
 }
 
+class TimerQueue
+{
+     EventLoop* loop_;
+    const int timerfd_;  // 一次只监听队列中的一个
+    Channel timerfdChannel_;
+    // Timer list sorted by expiration
+    TimerList timers_;  //定时器链表
+}
+
+class EventLoopThreadPool
+{
+    boost::ptr_vector<EventLoopThread> threads_; // 存放每一个EventLoopThread
+    std::vector<EventLoop*> loops_;  // 存放每一个EventLoopThread中的EventLoop
+}
+
+class EventLoopThread
+{
+    EventLoop* loop_;
+    Thread thread_;
+}
+
+```
+
+- EventLoop事件循环器，其中有Poller, 来进行poll或epoll。
+- 把poll的数据封装成一个Channel。里面有fd，对应的回调函数。
+- 定时器也用timefd来实现，定时一到调用TimerQueue::handleRead，只监听队列中的最早的channel。
+- TcpServer里有EventLoopThreadPool，相当于一个线程池，管理EventLoopThread。
+
+```plantuml
+actor user
+user ->EventLoop: loop()
+EventLoop ->Poller: pool()
+Poller -> Poller: fillActiveChannels
+Poller -> EventLoop: active Channels
+EventLoop -> ChannelA: handleEvent
+EventLoop -> ChannelB: handleEvent
+
+EventLoop ->Poller: pool()
+
+
+```
+
+```plantuml
+title TcpServer服务器
+
+class TcpServer
+{
+    // 管理accept后的TcpConnection
+    Acceptor acceptor_;  // 处理客户端连接
+    EventLoopThreadPool threadPool_;  // 线程池
+    ConnectionCallback connectionCallback_;
+    MessageCallback messageCallback_;
+    EventLoop* loop_;  // 事件循环
+    ConnectionMap connections_;  // map<string, TcpConnectionPtr> 管理连接
+}
+
 class TcpConnection
 {
     boost::scoped_ptr<Socket> socket_;
     boost::scoped_ptr<Channel> channel_;
 }
 
+class Acceptor
+{
+    // 用于tcp连接
+    Channel acceptChannel_;
+    Socket acceptSocket_;
+
+    NewConnectionCallback newConnectionCallback_; // 新连接来时的handle
+}
+
+class socket
+{   
+    //tcp listen时的监听socket
+    const int sockfd_;
+}
+
 ```
+- TcpServer在初始化时，accptor还没监听，只是申请了socket
+- TcpServer在start()后，调用Acceptor::listen，对socket进行监听。
+- 在有新连接时，创建TcpConnection，由TcpServer管理。同时调用TcpConnection::connectEstablished()，将起加入poll，同时调用用户设置的connectionCallback。
+
+
+```plantuml
+
+actor user
+user -> EventLoop: loop()
+EventLoop -> Channel: handleEvent()
+Channel -> Acceptor: handleRead()
+Acceptor -> Acceptor: accept
+Acceptor -> TcpServer: newConnection
+TcpServer -> TcpConnection: connectEstablished
+
+```
+
+
 ```
 echo
 
