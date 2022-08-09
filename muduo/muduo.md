@@ -2,6 +2,7 @@
 - [listen](#listen)
 - [socket listen epoll_ctl](#socket-listen-epoll_ctl)
 - [readv](#readv)
+- [TcpConnectionPtr管理](#tcpconnectionptr管理)
 
 ``` plantuml
 
@@ -44,12 +45,21 @@ class EventLoopThread
     Thread thread_;
 }
 
+class Poller
+{
+    typedef std::vector<Channel*> ChannelList;
+    typedef std::map<int, Channel*> ChannelMap;
+    ChannelMap channels_;  // 存放需要监听的Channel
+}
+
 ```
 
 - EventLoop事件循环器，其中有Poller, 来进行poll或epoll。
 - 把poll的数据封装成一个Channel。里面有fd，对应的回调函数。
 - 定时器也用timefd来实现，定时一到调用TimerQueue::handleRead，只监听队列中的最早的channel。
 - TcpServer里有EventLoopThreadPool，相当于一个线程池，管理EventLoopThread。
+
+- 其他线程向io线程注册函数，EventLoop::runInLoop. 会判断是否在当前线程。如果在当前线程，直接调用函数。如果不在当前线程，会将函数保存，并向wakeupFd_写入数据来唤醒。
 
 ```plantuml
 actor user
@@ -82,7 +92,7 @@ class TcpServer
 class TcpConnection
 {
     boost::scoped_ptr<Socket> socket_;
-    boost::scoped_ptr<Channel> channel_;
+    boost::scoped_ptr<Channel> channel_;  // poll通道
 }
 
 class Acceptor
@@ -92,12 +102,23 @@ class Acceptor
     Socket acceptSocket_;
 
     NewConnectionCallback newConnectionCallback_; // 新连接来时的handle
+
+    EventLoop* loop_;
 }
 
 class socket
 {   
     //tcp listen时的监听socket
     const int sockfd_;
+}
+
+class Buffer
+{
+    std::vector<char> buffer_;
+    size_t readerIndex_;
+    size_t writerIndex_;
+
+    ssize_t readFd(int fd, int* savedErrno);
 }
 
 ```
@@ -346,3 +367,9 @@ echo
 
 
 TcpServer中有 EventLoop和EventLoopThreadPool
+
+
+#### TcpConnectionPtr管理
+- TcpServer中有ConnectionMap来管理 TcpConnection。存入的是TcpConnection的智能指针。
+- channel::tie(), 存有TcpConnection的weak_ptr
+- channel::handleEvent时，根据该weak_ptr来取得智能指针，防止指针被销毁掉

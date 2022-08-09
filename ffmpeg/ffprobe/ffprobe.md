@@ -74,6 +74,27 @@
 
 ```
 
+mp4是ff_mov_demuxer
+我们从flv和mp4等文件解封装读取的AVPacket并没有SPS、PPS数据，而是保存在 AVFormatContext -> streams -> codecpar -> extradata里。
+
+在解码过程中，需要设置SPS/PPS等解码信息，才能够初始化解码器。
+有两种方式可以设置SPS/PPS，
+一种是手动指定SPS/PPS内容，指定AVCodecContext结构体中extradata的值；
+    memcpy(pFormatContext->streams[0]->codecpar->extradata, szSPSPPS, sizeof(szSPSPPS));
+    通过avcodec_parameters_to_context将信息从pFormatContext->streams[0]->codecpar拷贝到m_pAVCodecContext
+avcodec_open2函数在调用的时候，会解析extradata数据的内
+h264_decode_init(AVCodecContext * avctx) 然后在函数体中，开始解析
+ff_h264_decode_seq_parameter_set.
+
+```
+#0  h264_decode_init (avctx=0x5555573c2b40) at libavcodec/h264dec.c:366
+#1  0x0000555555888adc in avcodec_open2 (avctx=0x5555573c2b40, codec=0x555556cd1c80 <ff_h264_decoder>, options=0x0)
+    at libavcodec/avcodec.c:323
+#2  0x000055555562fa1e in main () at /home/fengpeng/ffmpegUser/decode.c:44
+
+```
+
+一种是让FFmpeg通过读取传输数据来分析SPS/PPS信息，一般情况下在每一个I帧之前都会发送一个SPS帧和PPS帧
 
 
 

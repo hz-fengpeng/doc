@@ -1,16 +1,16 @@
 /**
- * ×î¼òµ¥µÄ»ùÓÚFFmpegµÄÊÓÆµ±àÂëÆ÷
+ * æœ€ç®€å•çš„åŸºäºFFmpegçš„è§†é¢‘ç¼–ç å™¨
  * Simplest FFmpeg Video Encoder
  * 
- * À×Ïöæè Lei Xiaohua
+ * é›·éœ„éª… Lei Xiaohua
  * leixiaohua1020@126.com
- * ÖĞ¹ú´«Ã½´óÑ§/Êı×ÖµçÊÓ¼¼Êõ
+ * ä¸­å›½ä¼ åª’å¤§å­¦/æ•°å­—ç”µè§†æŠ€æœ¯
  * Communication University of China / Digital TV Technology
  * http://blog.csdn.net/leixiaohua1020
  * 
- * ±¾³ÌĞòÊµÏÖÁËYUVÏñËØÊı¾İ±àÂëÎªÊÓÆµÂëÁ÷£¨H264£¬MPEG2£¬VP8µÈµÈ£©¡£
- * ÊÇ×î¼òµ¥µÄFFmpegÊÓÆµ±àÂë·½ÃæµÄ½Ì³Ì¡£
- * Í¨¹ıÑ§Ï°±¾Àı×Ó¿ÉÒÔÁË½âFFmpegµÄ±àÂëÁ÷³Ì¡£
+ * æœ¬ç¨‹åºå®ç°äº†YUVåƒç´ æ•°æ®ç¼–ç ä¸ºè§†é¢‘ç æµï¼ˆH264ï¼ŒMPEG2ï¼ŒVP8ç­‰ç­‰ï¼‰ã€‚
+ * æ˜¯æœ€ç®€å•çš„FFmpegè§†é¢‘ç¼–ç æ–¹é¢çš„æ•™ç¨‹ã€‚
+ * é€šè¿‡å­¦ä¹ æœ¬ä¾‹å­å¯ä»¥äº†è§£FFmpegçš„ç¼–ç æµç¨‹ã€‚
  * This software encode YUV420P data to H.264 bitstream.
  * It's the simplest video encoding software based on FFmpeg. 
  * Suitable for beginner of FFmpeg 

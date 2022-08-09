@@ -154,6 +154,31 @@ class AVFrame
     AVBufferRef *buf[AV_NUM_DATA_POINTERS];
 }
 
+class AVBufferPool
+{
+    // AVBuffer内存池
+    AVMutex mutex;
+    BufferPoolEntry *pool;
+
+    atomic_uint refcount;
+
+    size_t size;
+    void *opaque;
+    AVBufferRef* (*alloc)(size_t size);
+    AVBufferRef* (*alloc2)(void *opaque, size_t size);
+    void         (*pool_free)(void *opaque);
+}
+
+class BufferPoolEntry
+{
+    uint8_t *data;
+    void *opaque;
+    void (*free)(void *opaque, uint8_t *data);
+
+    AVBufferPool *pool;
+    struct BufferPoolEntry *next;
+}
+
 @enduml
 
 ```
@@ -187,6 +212,42 @@ void av_packet_free(AVPacket **pkt);	释放AVPacket和_alloc对应
 
 
  
+ ```
+ 外部库调用ffmpeg解码，vlc里操作
+    1. AVPacket *pkt = av_packet_alloc(); 申请一个AVPacket
+    2.  赋值pkt里的变量，似乎不考虑AVBufferRef。
+        pkt->data 
+        pkt->size 
+        pkt->pts 
+        pkt->dts 
+        p_block->i_pts =
+        p_block->i_dts = 
+    3.  给解码器发送包
+        ret = avcodec_send_packet(p_context, pkt);
+    4.  释放pkt。
+        av_packet_free( &pkt );
+
+    5. AVFrame *frame = av_frame_alloc();  申请AVFrame
+    6. ret = avcodec_receive_frame(p_context, frame);  // 接收AVFrame
+        memcpy
+    7. av_frame_free(&frame); // 释放frame 
+
+ ```
+
+```
+
+流结束的情况
+文件流结束后都需要“刷新”(也叫draining)编解码器，因为编解码器可能出于性能考虑或由于必须的原因(比如考虑b帧时)会在内部缓冲多个帧或包，为了拿到这些剩余的数据，处理方法如下：
+
+文件结束时，将NULL(而不是有效的输入，具体来说比如解码时将输入的packet设置为：pkt->data = NULL;pkt->size = 0;)发送到avcodec_send_packet()(解码时)或avcodec_send_frame()(编码时)函数，这将进入draining模式。
+
+在循环中调用avcodec_receive_frame()(解码)或avcodec_receive_packet()(编码)时，加入对返回值是否是AVERROR_EOF的判断。当输入NULL进入draining模式后将会返回AVERROR_EOF而不会返回AVERROR(EAGAIN)。
+
+捕获AVERROR_EOF后，调用avcodec_flush_buffers()刷新编解码器使得可以恢复重新解码
+```
+
+
+
 
 @startuml
 
@@ -197,7 +258,8 @@ class MyAVPacketList
 }
 
 class AVFifoBuffer
-{   // 队列
+{   
+    // 队列
     uint8_t *buffer;
     uint8_t *rptr, *wptr, *end;
     uint32_t rndx, wndx;
@@ -213,11 +275,28 @@ class PacketQueue
     int serial;
 }
 @enduml
+
 ffmpeg中的packet队列
 AVPacket队列  int packet_queue_put(PacketQueue *q, AVPacket *pkt)
 在函数里调用av_packet_alloc生成pkt1, 然后调用av_packet_move_ref, 将pkt移动到pkt1.
-此时，pkt里的AVBufferRef设置为NULL
+此时，pkt里的AVBufferRef设置为NULL.
+相当于重新生成了AVPacket, 放在队列里也只是指针。
 
+从队列中取包, 从队列中取出指针AVPacket*. 然后调用av_packet_move_ref，将队列中的指针AVPacket*里的内容
+转移到pkt中，同时调用av_packet_free释放队列中的AVPacket*。
+取出AVPacket后，发送给解码器后，调用av_packet_unref(), 将AVPacket引用计数减一。
+
+ffmpeg里的内存池 pool_release_buffer
+在解码时，会用到内存池。
+av_buffer_pool_init；初始化内存池
+av_buffer_pool_get；从内存池中取一个AVBufferRef
+
+内存池中的AVBufferRef是以BufferPoolEntry连成一个链表
+每个buffer的大小都是一样的。就是这个内存池只能放一种类型
+
+pool_release_buffer；将内存还给内存池
+av_buffer_pool_uninit；释放内存池
+内存池在初始化解码器时会初始化，在解码器释放后会销毁。
 
 
 AVFrame常用API
@@ -233,3 +312,15 @@ AVFrame *av_frame_clone(const AVFrame *src);	等于av_frame_alloc()+av_frame_ref
 对于视频（Video）来说，AVPacket通常包含一个压缩的Frame；
 而音频（Audio）则有可能包含多个压缩的Frame。
 并且，一个packet也有可能是空的，不包含任何压缩数据data，只含有边缘数据side data
+
+
+has_codec_parameters
+    ffmpeg解码器需要的参数
+    音频：
+        1. frame_size.   帧长，没有固定帧长的码型不需要
+        2. sample_fmt.   采样格式，每个采样点的位数。 如：AV_SAMPLE_FMT_S16, ///< signed 16 bits
+        3. sample_rate.  采样率 8000
+        4. channels.     声道数。
+        5. 码型.          pcma 
+    视频：
+        1. width
