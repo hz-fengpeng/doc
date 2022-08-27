@@ -695,3 +695,189 @@ consumer->wait(mw_msgs, mw_sleep);
 生产者队列中有数据时```srs_cond_signal(mw_wait);```
 
 
+
+### SRS forward 模式
+
+Forward 表示向前、前头的、发送等意思。
+在SRS中可以理解为把Master节点获得直播流⼴播（转发）给所有的Slave节点，master节点由多少路直播流，那么在每个slave节点也会多少路直播流。
+
+Forward适合与搭建小型集群
+
+在客户端往主节点推流时
+SrsRtmpConn::publishing
+    SrsRtmpConn::acquire_publish
+        SrsLiveSource::on_publish()
+            SrsOriginHub::on_publish
+                SrsOriginHub::create_forwarders(): 根据配置项里的forward信息，生成SrsForwarder，放到std::vector<SrsForwarder*> forwarders;中，设置队列。
+                    SrsForwarder::on_publish(): 开启forward协程 SrsForwarder::cycle()。
+                        在SrsForwarder::do_cycle()中，会创建SrsSimpleRtmpClient客户端，与要forward的服务器connect。并在forward()函数中从SrsMessageQueue* queue取数据并发送数据。
+    SrsRtmpConn::do_publishing，拉流在新的协程中，这里只做一些统计
+    SrsRecvThread::cycle() 拉流协程
+        SrsPublishRecvThread::consume()  取到新包
+            SrsRtmpConn::process_publish_message
+                SrsLiveSource::on_audio
+                    SrsLiveSource::on_audio_imp
+                        SrsOriginHub::on_audio,  遍历forwarders数组，进行分发。
+                            SrsForwarder::on_audio。将数据放入SrsMessageQueue* queue
+
+### SRS Edge模式
+推流到edge上时，edge会直接将流转发给源站。
+播放edge上的流时，edge会回源拉流；
+
+#### 推流到edge
+SrsRtmpConn::acquire_publish
+    如果是边缘节点，
+    SrsLiveSource::on_edge_start_publish()
+        SrsPublishEdge::on_client_publish()
+            SrsEdgeForwarder::start()：根据算法选择一个origin节点，创建SrsSimpleRtmpClient (sdk).与源站连接。并开启edge-fwr协程，SrsEdgeForwarder::do_cycle()。该协程主要是接收源站的消息和将队列里的数据发生给源站
+
+SrsRecvThread::cycle() 在拉流协程中，当取到数据
+    SrsRtmpConn::process_publish_message，如果判断出是边缘节点
+        SrsLiveSource::on_edge_proxy_publish
+            SrsPublishEdge::on_proxy_publish
+                SrsEdgeForwarder::proxy   主要是将数据放入到队列中。
+
+#### 从edge拉流
+
+SrsRtmpConn::playing
+    SrsLiveSource::create_consumer: 生成consumer，如果是边缘节点。
+        SrsPlayEdge::on_client_play()
+            SrsEdgeIngester::start(): 开启协程SrsEdgeIngester::cycle()，生成SrsEdgeRtmpUpstream,与源站连接。SrsEdgeRtmpUpstream::connect()中会从多个选择从源站中选择一路。SrsEdgeIngester::ingest(),一直接收消息，调用SrsEdgeIngester::process_publish_message，将数据放到source里的消费者队列。同一路流只会开启一个协程拉。
+
+### SRS支持webRTC
+#### 配置文件
+```
+
+增加RTC配置
+
+listen              1935;
+max_connections     1000;
+daemon              off;
+srs_log_tank        console;
+
+http_server {
+    enabled         on;
+    listen          8080;
+    dir             ./objs/nginx/html;
+}
+
+http_api {
+    enabled         on;
+    listen          1985;
+}
+stats {
+    network         0;
+}
+rtc_server {
+    enabled on;
+    # Listen at udp://8000
+    listen 8000;
+    #
+    # The $CANDIDATE means fetch from env, if not configed, use * as default.
+    #
+    # The * means retrieving server IP automatically, from all network interfaces,
+    # @see https://github.com/ossrs/srs/wiki/v4_CN_RTCWiki#config-candidate 这里需要配置外网IP
+    candidate 192.168.1.103; 
+}
+
+```
+
+```
+ffmpeg -re -i time.flv -vcodec copy -acodec copy -f flv -y rtmp://192.168.1.103/live/livestream
+http:///192.168.1.103:8080/players/rtc_player.html
+
+```
+
+连接过程：
+    rtmp推流到SRS
+    RTMP流转为RTC流
+    RTC客户端和SRS通过HTTP交互SDP信息，1. RTC客户端与SRS中的HttpServer连接，协商sdp。
+    RTC客户端通过RTP拉流，2.与udp服务器连接收发rtp数据
+
+WebRTC交互逻辑
+    1. 浏览器首先发送自己的offer sdp到SFU(signal server)服务器，然后服务器返回answer sdp，返回的answer sdp包含  ice 候选项和dtls相关的信息。 **浏览器与信令服务器连接**. srs中，signal服务器的端口为1985.浏览器发送http消息，其中包含了sdp信息，sdp中含有ICE。服务器返回sdp，包括媒体通信的udp端口。
+   
+    2. 浏览器客户端收到sdp之后会首先进行ice连接（即一条udp链路）。**即浏览器与媒体服务器连接**
+    3. 连接建立之后，发起dtls交互，得到远端和本地的srtp的key（分别用于解密远端到来的srtp和加密本地即将发出去的rtp数据包）。
+    4. 然后就可以接收和发送rtp，rtcp数据了，发送之前要进行srtp加密，然后通过ice的连接发送出去。dtls 和 srtp 的数据包都是通过ice的udp连接进行传输的。
+
+
+
+SrsLiveSource:代表RTMP源
+SrsRtcSource:代表RTC源
+通过SrsRtcFromRtmpBridger进行转换
+
+```plantuml
+
+SrsRtcServer *-- RtcServerAdapter
+
+class RtcServerAdapter
+{
+    SrsRtcServer* rtc;
+}
+
+class SrsRtcServer
+{
+    std::vector<SrsUdpMuxListener*> listeners;
+    srs_error_t listen_udp();
+    srs_error_t listen_api();
+}
+
+```
+
+SrsRtmpConn::acquire_publish: 如果rtc_server_enable,rtc_enable,并且不是边缘节点，会生成SrsRtcSource。
+根据SrsRtcSource生成SrsRtcFromRtmpBridger
+SrsRtcFromRtmpBridger *bridger = new SrsRtcFromRtmpBridger(rtc);
+SrsLiveSource::set_bridger(bridger);
+
+在收到数据后，如音频数据
+SrsLiveSource::on_audio_imp里，bridger_->on_audio(msg)。将数据发送给bridger
+    SrsRtcFromRtmpBridger::on_audio: 会调用ffmpeg进行转码，并将转换后的数据给SrsRtcSource。
+        SrsRtcSource::on_rtp: 将数据分发给consume
+
+
+
+
+SrsRtcServer::listen_udp()
+    读取配置文件中的rtc_server配置项，创建SrsUdpMuxListener，并创建协程开始监听。SrsUdpMuxListener::cycle()协程。
+
+SrsRtcServer::listen_api()
+    主要是处理webrtc中开始的信令协商请求"/rtc/v1/play","/rtc/v1/publish/"
+
+在SrsServer::listen时，就开始了http监听。在有http连接后，生成对应的conn，比如SrsHttpApi，SrsHttpConn::do_cycle()
+
+#### http协商sdp,tcp
+```
+#0  SrsGoApiRtcPlay::serve_http (this=0x55555610a5e0, w=0x555556493c40, r=0x5555563302b0) at src/app/srs_app_rtc_api.cpp:43
+#1  0x0000555555698691 in SrsHttpServeMux::serve_http (this=0x5555560b9f10, w=0x555556493c40, r=0x5555563302b0)
+    at src/protocol/srs_http_stack.cpp:727
+#2  0x0000555555699482 in SrsHttpCorsMux::serve_http (this=0x555556376a70, w=0x555556493c40, r=0x5555563302b0)
+    at src/protocol/srs_http_stack.cpp:875
+#3  0x0000555555767c26 in SrsHttpConn::process_request (this=0x555556312e30, w=0x555556493c40, r=0x5555563302b0, rid=1)
+    at src/app/srs_app_http_conn.cpp:233
+#4  0x000055555576786b in SrsHttpConn::process_requests (this=0x555556312e30, preq=0x555556493d18)
+    at src/app/srs_app_http_conn.cpp:206
+#5  0x00005555557673e9 in SrsHttpConn::do_cycle (this=0x555556312e30) at src/app/srs_app_http_conn.cpp:160
+#6  0x0000555555766dd6 in SrsHttpConn::cycle (this=0x555556312e30) at src/app/srs_app_http_conn.cpp:105
+#7  0x0000555555714724 in SrsFastCoroutine::cycle (this=0x5555563ffc00) at src/app/srs_app_st.cpp:272
+#8  0x00005555557147c0 in SrsFastCoroutine::pfn (arg=0x5555563ffc00) at src/app/srs_app_st.cpp:287
+#9  0x000055555582a753 in _st_thread_main () at sched.c:363
+#10 0x000055555582afef in st_thread_create (start=0x5555557147a0 <SrsFastCoroutine::pfn(void*)>, arg=0x5555563ffc00, joinable=1,
+    stk_size=65536) at sched.c:694
+```
+
+SrsRtcServer::create_session
+SrsRtcSourceManager::fetch_or_create，创建一个SrsRtcSource
+SrsRtcConnection::add_player 生成SrsRtcConnection
+ -  SrsRtcConnection::create_player， 生成SrsRtcPlayStream
+ -  SrsRtcPlayStream::cycle()，生成consume，放入到SrsRtcSource
+
+##### udp处理
+SrsRtcServer::on_udp_packet
+    根据ip端口找到SrsRtcConnection。
+    区分rtp和rtcp，根据数据头，同时也根据数据头区分stun，dtls
+
+    SrsRtcConnection::on_dtls
+    SrsRtcConnection::on_rtcp
+    SrsRtcConnection::on_stun
+    SrsRtcConnection::on_rtp
