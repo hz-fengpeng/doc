@@ -1,0 +1,4 @@
+sudo ./objs/httpx-static -http 80 -https 443 -ssk server.key -ssc server.crt -proxy http://127.0.0.1:1989/sig -proxy http://127.0.0.1:1985/rtc -proxy http://127.0.0.1:8080/
+
+https://192.168.152.131/demos/one2one.html?autostart=true    2方
+https://192.168.152.131/demos/room.html?autostart=true		 多人

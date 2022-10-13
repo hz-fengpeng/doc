@@ -1,0 +1,1 @@
+/usr/bin/g++-7     CMakeFiles/test.dir/String.cpp.o CMakeFiles/test.dir/test.cpp.o  -o test 

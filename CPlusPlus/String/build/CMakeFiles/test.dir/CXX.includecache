@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/fengpeng/String/String.cpp
+String.hpp
+/home/fengpeng/String/String.hpp
+string.h
+-
+
+/home/fengpeng/String/String.hpp
+iostream
+-
+
+/home/fengpeng/String/StringArray.hpp
+vector
+-
+String.hpp
+/home/fengpeng/String/String.hpp
+
+/home/fengpeng/String/test.cpp
+String.hpp
+/home/fengpeng/String/String.hpp
+iostream
+-
+StringArray.hpp
+/home/fengpeng/String/StringArray.hpp
+

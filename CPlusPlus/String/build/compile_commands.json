@@ -1,0 +1,12 @@
+[
+{
+  "directory": "/home/fengpeng/String/build",
+  "command": "/usr/bin/g++-7      -o CMakeFiles/test.dir/String.cpp.o -c /home/fengpeng/String/String.cpp",
+  "file": "/home/fengpeng/String/String.cpp"
+},
+{
+  "directory": "/home/fengpeng/String/build",
+  "command": "/usr/bin/g++-7      -o CMakeFiles/test.dir/test.cpp.o -c /home/fengpeng/String/test.cpp",
+  "file": "/home/fengpeng/String/test.cpp"
+}
+]
