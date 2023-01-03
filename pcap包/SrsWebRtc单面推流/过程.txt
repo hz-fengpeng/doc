@@ -1,0 +1,2 @@
+打开一个chrome浏览器，输入https://192.168.152.131:8088/players/rtc_publisher.html 如下图：
+其中URL webrtc://192.168.9.200/live/livestream是客户端JS代码自动生成的，推拉流客户端必须保持一致

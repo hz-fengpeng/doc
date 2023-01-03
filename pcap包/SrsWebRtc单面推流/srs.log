@@ -1,0 +1,256 @@
+[2022-12-10 21:01:14.302][Trace][6149][1324478n][MAIN] SRS/4.0.267(Leo), MIT
+[2022-12-10 21:01:14.302][Trace][6149][1324478n] authors: https://github.com/ossrs/srs/blob/4.0release/trunk/AUTHORS.txt
+[2022-12-10 21:01:14.302][Trace][6149][1324478n] contributors: Winlin<winlin@vip.126.com> Winlin<winterserver@126.com> Winlin<chengli.ycl@alibaba-inc.com> Wenjie<zhaowenjie@tal.com> Wenjie<740936897@qq.com> Wenjie<wenjie.zhao@chinacache.com> xiangcheng.liu<liuxc0116@foxmail.com> naijia.liu<youngcow@youngcow.net> alcoholyi<alcoholyi@qq.com> byteman<wangchen2011@gmail.com> chad.wang<chad.wang.cn@gmail.com> suhetao<suhetao@gmail.com> Johnny<fengjihu@163.com> karthikeyan<keyanmca@gmail.com> StevenLiu<lq@chinaffmpeg.org> zhengfl<zhengfl_1989@126.com> tufang14<breadbean1449@gmail.com> allspace<allspace@gmail.com> niesongsong<nie950@gmail.com> rudeb0t<nimrod@themanxgroup.tw> CallMeNP<np.liamg@gmail.com> synote<synote@qq.com> lovecat<littlefawn@163.com> panda1986<542638787@qq.com> YueHonghui<hongf.yue@hotmail.com> ThomasDreibholz<dreibh@simula.no> JuntaoLiu<juntliu@gmail.com> RocFang<fangpeng1986@gmail.com> MakarovYaroslav<yaroslav.makarov.97@mail.ru> MirkoVelic<mvelic@inoxx.net> HuiZhang(huzhang2)<huzhang2@cisco.com> OtterWa<simpleotter23@gmail.com> walkermi<172192667@qq.com> haofz<fuzhuang.hao@vhall.com> ME_Kun_Han<hanvskun@hotmail.com> ljx0305<ljx0305@gmail.com> cenxinwei<censhanhe@163.com> StarBrilliant<m13253@hotmail.com> xubin<xubin@chnvideo.com> intliang<yintiliang@gmail.com> flowerwrong<sysuyangkang@gmail.com> YLX<568414379@qq.com> J<guotaojiang@qq.com> Harlan<hailiang@gvrcraft.com> hankun<hankun@bravovcloud.com> JonathanBarratt<jonathan.barratt@gmail.com> KeeganH<keeganwharris@gmail.com> StevenLiu<lingjiujianke@gmail.com> liuxc0116<liuxc0116@gmail.com> ChengdongZhang<lmajzcd@sina.com> lovacat<lovecat@china.sina.com> qiang.li<qiang.li@verycdn.com.cn> HungMingWu<u9089000@gmail.com> Himer<xishizhaohua@qq.com> XiaLixin<xialixin@kanzhun.com> XiaLixin<68469352@qq.com> XiaLixin<xlx0625@163.com> XiaLixin<xialx@yuntongxun.com> alphonsetai<tyh_123@163.com> Michael.Ma<wnpllr@gmail.com> lam2003<linmin3@yy.com> ShiWei<shiwei05@kuaishou.com> ShiWei<shi.weibd@hotmail.com> XiaofengWang<wasphin@gmail.com> XiaoZhihong<hondaxiao@tencent.com> XiaoZhihong<xiaozhihong8@gmail.com> XiaoZhihong<xiaozhihong@huya.com> yanghuiwen<cainiaodj@qq.com> WuPengqiang<309554135@qq.com> WuPengqiang<pengqiang.wpq@alibaba-inc.com> l<22312935+lam2003@github> xfalcon<x-falcon@github> ChenGuanghua<jinxue.cgh@alibaba-inc.com> ChenGuanghua<chengh_math@126.com> LiPeng<mozhan.lp@alibaba-inc.com> LiPeng<lipeng19811218@gmail.com> yajun18<yajun18@staff.sina.com.cn> liulichuan<liulichuan@kuaishou.com> yapingcat<caoyapingneu@163.com> chenchengbin<chenchengbin@yy.com> ChenHaibo<495810242@qq.com> ChenHaibo<nmgchenhaibo@foxmail.com> jasongwq<jasongwq@gmail.com> yinjiaoyuan<yinjiaoyuan@163.com> PieerePi<pihuibin@hotmail.com> JesseXi<jesse.jinjin@wo.cn> PieerePi<40780488+PieerePi@github> ghostsf<ghost_sf@163.com> xbpeng121<53243357+xbpeng121@github> johzzy<hellojinqiang@gmail.com> stone<bluestn@163.com> cfw11<34058899+cfw11@github> Hung-YiChen<gaod.chen@gmail.com> long<liyalong12345@126.com> matthew1838<77285055+matthew1838@github> rise<rise.worlds@outlook.com> 
+[2022-12-10 21:01:14.302][Trace][6149][1324478n] cwd=/home/fengpeng/srs-4.0release/trunk, work_dir=./, build: 2022-12-09 19:24:39, configure: --x86-x64 --debug=on, uname: Linux vmware 4.15.0-194-generic #205-Ubuntu SMP Fri Sep 16 19:49:27 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux, osx: 0, pkg: , region: , source: 
+[2022-12-10 21:01:14.302][Trace][6149][1324478n] configure detail: --prefix=/usr/local/srs --config=conf/srs.conf --hls=on --hds=off --dvr=on --ssl=on --https=on --ssl-1-0=off --ssl-local=off --sys-ssl=off --transcode=on --ingest=on --stat=on --http-callback=on --http-server=on --stream-caster=on --http-api=on --utest=off --cherrypy=off --srt=off --rtc=on --simulator=off --cxx11=off --cxx14=off --ffmpeg-fit=on --nasm=on --srtp-nasm=on --clean=on --gperf=off --gmc=off --gmd=off --gmp=off --gcp=off --gprof=off --static=off --shared-st=off --shared-srt=off --shared-ffmpeg=off --log-verbose=off --log-info=off --log-trace=on --gcov=off --debug=on --debug-stats=off --cross-build=off --cc=gcc --cxx=g++ --ar=ar --ld=ld --randlib=randlib
+[2022-12-10 21:01:14.302][Trace][6149][1324478n] srs checking config...
+[2022-12-10 21:01:14.302][Trace][6149][1324478n] ips, iface[0] ens33 ipv4 0x11043 192.168.152.131, iface[1] ens33 ipv6 0x11043 fe80::20c:29ff:fe4e:43c3%ens33
+[2022-12-10 21:01:14.302][Trace][6149][1324478n] devices, intranet ens33 192.168.152.131, intranet ens33 fe80::20c:29ff:fe4e:43c3%ens33
+[2022-12-10 21:01:14.302][Warn][6149][1324478n][22] stats network use index=0, ip=192.168.152.131, ifname=ens33
+[2022-12-10 21:01:14.302][Warn][6149][1324478n][22] stats disk not configed, disk iops disabled.
+[2022-12-10 21:01:14.302][Trace][6149][1324478n] you can check log by: tail -n 30 -f ./objs/srs.log
+[2022-12-10 21:01:14.302][Trace][6149][1324478n] please check SRS by: ./etc/init.d/srs status
+[2022-12-10 21:01:14.302][Trace][6149][1324478n] features, rch:on, dash:on, hls:on, hds:off, srt:off, hc:on, ha:on, hs:on, hp:on, dvr:on, trans:on, inge:on, stat:on, sc:on
+[2022-12-10 21:01:14.302][Trace][6149][1324478n] SRS on  amd64 x86_64, conf:test.conf, limit:1000, writev:1024, encoding:little-endian, HZ:100
+[2022-12-10 21:01:14.302][Trace][6149][1324478n] mw sleep:350ms. mr enabled:on, default:0, sleep:350ms
+[2022-12-10 21:01:14.302][Trace][6149][1324478n] gc:on, pq:30000ms, cscc:[0,16), csa:on, tn:on(may hurts performance), ss:auto(guess by merged write)
+[2022-12-10 21:01:14.302][Trace][6149][1324478n] system default latency(ms): mw(0-350) + mr(0-350) + play-queue(0-30000)
+[2022-12-10 21:01:14.305][Trace][6149][1324478n] fingerprint=2A:E8:48:9B:EC:29:F1:7B:C8:03:9F:DF:3C:10:33:89:69:BC:E5:BA:40:E6:56:DB:1F:92:47:0D:F2:26:74:95
+[2022-12-10 21:01:14.305][Trace][6149][1324478n] CircuitBreaker: enabled=1, high=2x90, critical=1x95, dying=5x99
+[2022-12-10 21:01:14.305][Trace][6149][1324478n] http: root mount to ./objs/nginx/html
+[2022-12-10 21:01:14.306][Trace][6149][1324478n] server main cid=1324478n, pid=6149, ppid=6148, asprocess=0
+[2022-12-10 21:01:14.306][Trace][6149][1324478n] write pid=6149 to ./objs/srs.pid success!
+[2022-12-10 21:01:14.306][Trace][6149][1324478n] RTMP listen at tcp://0.0.0.0:1935, fd=8
+[2022-12-10 21:01:14.306][Trace][6149][1324478n] HTTP-API listen at tcp://0.0.0.0:1985, fd=9
+[2022-12-10 21:01:14.306][Trace][6149][1324478n] HTTPS-API listen at tcp://0.0.0.0:443, fd=10
+[2022-12-10 21:01:14.306][Trace][6149][1324478n] HTTP-Server listen at tcp://0.0.0.0:8080, fd=11
+[2022-12-10 21:01:14.306][Trace][6149][1324478n] HTTPS-Server listen at tcp://0.0.0.0:8088, fd=12
+[2022-12-10 21:01:14.306][Trace][6149][1324478n] signal installed, reload=1, reopen=10, fast_quit=15, grace_quit=3
+[2022-12-10 21:01:14.306][Trace][6149][1324478n] http: api mount /console to ./objs/nginx/html/console
+[2022-12-10 21:01:14.306][Trace][6149][1324478n] rtc listen at udp://0.0.0.0:8000, fd=13
+[2022-12-10 21:01:14.306][Trace][6149][3icn60qx] Hybrid cpu=0.00%,12MB
+[2022-12-10 21:01:14.306][Warn][6149][3b201873][22] use private address as ip: 192.168.152.131, ifname=ens33
+[2022-12-10 21:01:14.306][Trace][6149][3b201873] Startup query id=vid-070887a, session=vid-65310g7, eip=192.168.152.131, wait=300s
+[2022-12-10 21:01:14.307][Trace][6149][2e3907vs] TCP: connection manager run, conns=0
+[2022-12-10 21:01:14.307][Trace][6149][9972126l] UDP #13 LISTEN at 0.0.0.0:8000, SO_SNDBUF(default=212992, expect=10485760, actual=425984, r0=0), SO_RCVBUF(default=212992, expect=10485760, actual=425984, r0=0)
+[2022-12-10 21:01:14.307][Trace][6149][b2625x6f] RTC: connection manager run, conns=0
+[2022-12-10 21:01:19.302][Trace][6149][3icn60qx] Hybrid cpu=0.00%,13MB
+[2022-12-10 21:01:24.302][Trace][6149][3icn60qx] Hybrid cpu=0.00%,13MB
+[2022-12-10 21:01:29.303][Trace][6149][3icn60qx] Hybrid cpu=0.00%,13MB, cid=1,1, timer=61,0,0, clock=0,37,10,0,1,0,0,0,0
+[2022-12-10 21:01:34.303][Trace][6149][3icn60qx] Hybrid cpu=0.00%,13MB, cid=1,1, timer=61,0,0, clock=0,37,10,0,1,0,0,0,0
+[2022-12-10 21:01:35.576][Trace][6149][wj5r4578] TCP: before dispose resource(HttpsStream)(0x55f566e93c20), conns=2, zombies=0, ign=0, inz=0, ind=0
+[2022-12-10 21:01:35.577][Error][6149][wj5r4578][0] serve error code=4042 : start : handshake : handshake r0=-1, r1=1
+thread [6149][wj5r4578]: do_cycle() [src/app/srs_app_http_conn.cpp:153][errno=0]
+thread [6149][wj5r4578]: on_start() [src/app/srs_app_http_conn.cpp:367][errno=0]
+thread [6149][wj5r4578]: handshake() [src/app/srs_app_conn.cpp:713][errno=0]
+[2022-12-10 21:01:35.577][Trace][6149][2e3907vs] TCP: clear zombies=1 resources, conns=2, removing=0, unsubs=0
+[2022-12-10 21:01:35.577][Trace][6149][wj5r4578] TCP: disposing #0 resource(HttpsStream)(0x55f566e93c20), conns=2, disposing=1, zombies=0
+[2022-12-10 21:01:35.577][Trace][6149][16hb4v74] TCP: before dispose resource(HttpsStream)(0x55f567014500), conns=1, zombies=0, ign=0, inz=0, ind=0
+[2022-12-10 21:01:35.577][Error][6149][16hb4v74][0] serve error code=4042 : start : handshake : handshake r0=-1, r1=1
+thread [6149][16hb4v74]: do_cycle() [src/app/srs_app_http_conn.cpp:153][errno=0]
+thread [6149][16hb4v74]: on_start() [src/app/srs_app_http_conn.cpp:367][errno=0]
+thread [6149][16hb4v74]: handshake() [src/app/srs_app_conn.cpp:713][errno=0]
+[2022-12-10 21:01:35.577][Trace][6149][2e3907vs] TCP: clear zombies=1 resources, conns=1, removing=0, unsubs=0
+[2022-12-10 21:01:35.577][Trace][6149][16hb4v74] TCP: disposing #0 resource(HttpsStream)(0x55f567014500), conns=1, disposing=1, zombies=0
+[2022-12-10 21:01:35.580][Trace][6149][50v03917] TCP: before dispose resource(HttpsStream)(0x55f567002080), conns=1, zombies=0, ign=0, inz=0, ind=0
+[2022-12-10 21:01:35.580][Error][6149][50v03917][0] serve error code=4042 : start : handshake : handshake r0=-1, r1=1
+thread [6149][50v03917]: do_cycle() [src/app/srs_app_http_conn.cpp:153][errno=0]
+thread [6149][50v03917]: on_start() [src/app/srs_app_http_conn.cpp:367][errno=0]
+thread [6149][50v03917]: handshake() [src/app/srs_app_conn.cpp:713][errno=0]
+[2022-12-10 21:01:35.580][Trace][6149][2e3907vs] TCP: clear zombies=1 resources, conns=1, removing=0, unsubs=0
+[2022-12-10 21:01:35.580][Trace][6149][50v03917] TCP: disposing #0 resource(HttpsStream)(0x55f567002080), conns=1, disposing=1, zombies=0
+[2022-12-10 21:01:35.584][Trace][6149][75934nj6] https: stream server done, use key ./conf/server.key and cert ./conf/server.crt, cost=2ms
+[2022-12-10 21:01:35.585][Trace][6149][75934nj6] HTTP #0 192.168.152.1:11970 GET https://192.168.152.131:8088/players/rtc_publisher.html, content-length=-1
+[2022-12-10 21:01:35.585][Trace][6149][75934nj6] http match file=./objs/nginx/html/players/rtc_publisher.html, pattern=/, upath=/players/rtc_publisher.html
+[2022-12-10 21:01:35.586][Trace][6149][75934nj6] TCP: before dispose resource(HttpsStream)(0x55f566e93c20), conns=1, zombies=0, ign=0, inz=0, ind=0
+[2022-12-10 21:01:35.586][Warn][6149][75934nj6][104] client disconnect peer. ret=1007
+[2022-12-10 21:01:35.586][Trace][6149][2e3907vs] TCP: clear zombies=1 resources, conns=1, removing=0, unsubs=0
+[2022-12-10 21:01:35.586][Trace][6149][75934nj6] TCP: disposing #0 resource(HttpsStream)(0x55f566e93c20), conns=1, disposing=1, zombies=0
+[2022-12-10 21:01:35.627][Trace][6149][6y70jvz0] TCP: before dispose resource(HttpsStream)(0x55f567082a20), conns=2, zombies=0, ign=0, inz=0, ind=0
+[2022-12-10 21:01:35.628][Error][6149][6y70jvz0][0] serve error code=4042 : start : handshake : handshake r0=-1, r1=1
+thread [6149][6y70jvz0]: do_cycle() [src/app/srs_app_http_conn.cpp:153][errno=0]
+thread [6149][6y70jvz0]: on_start() [src/app/srs_app_http_conn.cpp:367][errno=0]
+thread [6149][6y70jvz0]: handshake() [src/app/srs_app_conn.cpp:713][errno=0]
+[2022-12-10 21:01:35.628][Trace][6149][2e3907vs] TCP: clear zombies=1 resources, conns=3, removing=0, unsubs=0
+[2022-12-10 21:01:35.629][Trace][6149][6y70jvz0] TCP: disposing #0 resource(HttpsStream)(0x55f567082a20), conns=3, disposing=1, zombies=0
+[2022-12-10 21:01:35.632][Trace][6149][7w5bs35x] TCP: before dispose resource(HttpsStream)(0x55f56708a290), conns=2, zombies=0, ign=0, inz=0, ind=0
+[2022-12-10 21:01:35.633][Error][6149][7w5bs35x][0] serve error code=4042 : start : handshake : handshake r0=-1, r1=1
+thread [6149][7w5bs35x]: do_cycle() [src/app/srs_app_http_conn.cpp:153][errno=0]
+thread [6149][7w5bs35x]: on_start() [src/app/srs_app_http_conn.cpp:367][errno=0]
+thread [6149][7w5bs35x]: handshake() [src/app/srs_app_conn.cpp:713][errno=0]
+[2022-12-10 21:01:35.633][Trace][6149][2e3907vs] TCP: clear zombies=1 resources, conns=4, removing=0, unsubs=0
+[2022-12-10 21:01:35.633][Trace][6149][7w5bs35x] TCP: disposing #0 resource(HttpsStream)(0x55f56708a290), conns=4, disposing=1, zombies=0
+[2022-12-10 21:01:35.639][Trace][6149][30dq0ee7] TCP: before dispose resource(HttpsStream)(0x55f5670777f0), conns=3, zombies=0, ign=0, inz=0, ind=0
+[2022-12-10 21:01:35.640][Error][6149][30dq0ee7][0] serve error code=4042 : start : handshake : handshake r0=-1, r1=1
+thread [6149][30dq0ee7]: do_cycle() [src/app/srs_app_http_conn.cpp:153][errno=0]
+thread [6149][30dq0ee7]: on_start() [src/app/srs_app_http_conn.cpp:367][errno=0]
+thread [6149][30dq0ee7]: handshake() [src/app/srs_app_conn.cpp:713][errno=0]
+[2022-12-10 21:01:35.640][Trace][6149][93q40906] TCP: before dispose resource(HttpsStream)(0x55f567072d00), conns=7, zombies=1, ign=0, inz=0, ind=0
+[2022-12-10 21:01:35.640][Error][6149][93q40906][0] serve error code=4042 : start : handshake : handshake r0=-1, r1=1
+thread [6149][93q40906]: do_cycle() [src/app/srs_app_http_conn.cpp:153][errno=0]
+thread [6149][93q40906]: on_start() [src/app/srs_app_http_conn.cpp:367][errno=0]
+thread [6149][93q40906]: handshake() [src/app/srs_app_conn.cpp:713][errno=0]
+[2022-12-10 21:01:35.640][Trace][6149][2e3907vs] TCP: clear zombies=2 resources, conns=7, removing=0, unsubs=0
+[2022-12-10 21:01:35.640][Trace][6149][30dq0ee7] TCP: disposing #0 resource(HttpsStream)(0x55f5670777f0), conns=7, disposing=2, zombies=0
+[2022-12-10 21:01:35.640][Trace][6149][93q40906] TCP: disposing #1 resource(HttpsStream)(0x55f567072d00), conns=6, disposing=2, zombies=0
+[2022-12-10 21:01:35.649][Trace][6149][n8669b00] TCP: before dispose resource(HttpsStream)(0x55f56709a050), conns=5, zombies=0, ign=0, inz=0, ind=0
+[2022-12-10 21:01:35.649][Error][6149][n8669b00][0] serve error code=4042 : start : handshake : handshake r0=-1, r1=1
+thread [6149][n8669b00]: do_cycle() [src/app/srs_app_http_conn.cpp:153][errno=0]
+thread [6149][n8669b00]: on_start() [src/app/srs_app_http_conn.cpp:367][errno=0]
+thread [6149][n8669b00]: handshake() [src/app/srs_app_conn.cpp:713][errno=0]
+[2022-12-10 21:01:35.650][Trace][6149][861g57t2] TCP: before dispose resource(HttpsStream)(0x55f567032cc0), conns=8, zombies=1, ign=0, inz=0, ind=0
+[2022-12-10 21:01:35.650][Error][6149][861g57t2][0] serve error code=4042 : start : handshake : handshake r0=-1, r1=1
+thread [6149][861g57t2]: do_cycle() [src/app/srs_app_http_conn.cpp:153][errno=0]
+thread [6149][861g57t2]: on_start() [src/app/srs_app_http_conn.cpp:367][errno=0]
+thread [6149][861g57t2]: handshake() [src/app/srs_app_conn.cpp:713][errno=0]
+[2022-12-10 21:01:35.650][Trace][6149][778n5m4v] https: stream server done, use key ./conf/server.key and cert ./conf/server.crt, cost=6ms
+[2022-12-10 21:01:35.650][Trace][6149][909z3p56] https: stream server done, use key ./conf/server.key and cert ./conf/server.crt, cost=4ms
+[2022-12-10 21:01:35.650][Trace][6149][2e3907vs] TCP: clear zombies=2 resources, conns=8, removing=0, unsubs=0
+[2022-12-10 21:01:35.650][Trace][6149][n8669b00] TCP: disposing #0 resource(HttpsStream)(0x55f56709a050), conns=8, disposing=2, zombies=0
+[2022-12-10 21:01:35.650][Trace][6149][861g57t2] TCP: disposing #1 resource(HttpsStream)(0x55f567032cc0), conns=7, disposing=2, zombies=0
+[2022-12-10 21:01:35.657][Trace][6149][3scw3361] https: stream server done, use key ./conf/server.key and cert ./conf/server.crt, cost=9ms
+[2022-12-10 21:01:35.657][Trace][6149][778n5m4v] HTTP #0 192.168.152.1:11977 GET https://192.168.152.131:8088/players/css/bootstrap.min.css, content-length=-1
+[2022-12-10 21:01:35.657][Trace][6149][778n5m4v] http match file=./objs/nginx/html/players/css/bootstrap.min.css, pattern=/, upath=/players/css/bootstrap.min.css
+[2022-12-10 21:01:35.662][Trace][6149][909z3p56] HTTP #0 192.168.152.1:11978 GET https://192.168.152.131:8088/players/js/winlin.utility.js, content-length=-1
+[2022-12-10 21:01:35.662][Trace][6149][909z3p56] http match file=./objs/nginx/html/players/js/winlin.utility.js, pattern=/, upath=/players/js/winlin.utility.js
+[2022-12-10 21:01:35.664][Trace][6149][58141568] https: stream server done, use key ./conf/server.key and cert ./conf/server.crt, cost=13ms
+[2022-12-10 21:01:35.665][Trace][6149][58141568] HTTP #0 192.168.152.1:11980 GET https://192.168.152.131:8088/players/js/jquery-1.10.2.min.js, content-length=-1
+[2022-12-10 21:01:35.665][Trace][6149][58141568] http match file=./objs/nginx/html/players/js/jquery-1.10.2.min.js, pattern=/, upath=/players/js/jquery-1.10.2.min.js
+[2022-12-10 21:01:35.670][Trace][6149][c4w7762g] https: stream server done, use key ./conf/server.key and cert ./conf/server.crt, cost=18ms
+[2022-12-10 21:01:35.670][Trace][6149][c4w7762g] HTTP #0 192.168.152.1:11981 GET https://192.168.152.131:8088/players/js/adapter-7.4.0.min.js, content-length=-1
+[2022-12-10 21:01:35.670][Trace][6149][c4w7762g] http match file=./objs/nginx/html/players/js/adapter-7.4.0.min.js, pattern=/, upath=/players/js/adapter-7.4.0.min.js
+[2022-12-10 21:01:35.675][Trace][6149][rrg0hv74] https: stream server done, use key ./conf/server.key and cert ./conf/server.crt, cost=20ms
+[2022-12-10 21:01:35.675][Trace][6149][3scw3361] HTTP #0 192.168.152.1:11979 GET https://192.168.152.131:8088/players/js/srs.page.js, content-length=-1
+[2022-12-10 21:01:35.675][Trace][6149][3scw3361] http match file=./objs/nginx/html/players/js/srs.page.js, pattern=/, upath=/players/js/srs.page.js
+[2022-12-10 21:01:35.676][Trace][6149][778n5m4v] TCP: before dispose resource(HttpsStream)(0x55f5670336e0), conns=6, zombies=0, ign=0, inz=0, ind=0
+[2022-12-10 21:01:35.676][Warn][6149][778n5m4v][104] client disconnect peer. ret=1007
+[2022-12-10 21:01:35.676][Trace][6149][909z3p56] TCP: before dispose resource(HttpsStream)(0x55f5670c0960), conns=6, zombies=1, ign=0, inz=0, ind=0
+[2022-12-10 21:01:35.676][Warn][6149][909z3p56][104] client disconnect peer. ret=1007
+[2022-12-10 21:01:35.676][Trace][6149][58141568] TCP: before dispose resource(HttpsStream)(0x55f567113d30), conns=6, zombies=2, ign=0, inz=0, ind=0
+[2022-12-10 21:01:35.676][Warn][6149][58141568][104] client disconnect peer. ret=1007
+[2022-12-10 21:01:35.676][Trace][6149][2e3907vs] TCP: clear zombies=3 resources, conns=6, removing=0, unsubs=0
+[2022-12-10 21:01:35.676][Trace][6149][778n5m4v] TCP: disposing #0 resource(HttpsStream)(0x55f5670336e0), conns=6, disposing=3, zombies=0
+[2022-12-10 21:01:35.676][Trace][6149][909z3p56] TCP: disposing #1 resource(HttpsStream)(0x55f5670c0960), conns=5, disposing=3, zombies=0
+[2022-12-10 21:01:35.676][Trace][6149][58141568] TCP: disposing #2 resource(HttpsStream)(0x55f567113d30), conns=4, disposing=3, zombies=0
+[2022-12-10 21:01:35.677][Trace][6149][rrg0hv74] HTTP #0 192.168.152.1:11982 GET https://192.168.152.131:8088/players/js/srs.sdk.js, content-length=-1
+[2022-12-10 21:01:35.678][Trace][6149][rrg0hv74] http match file=./objs/nginx/html/players/js/srs.sdk.js, pattern=/, upath=/players/js/srs.sdk.js
+[2022-12-10 21:01:35.679][Trace][6149][3scw3361] TCP: before dispose resource(HttpsStream)(0x55f56706e980), conns=3, zombies=0, ign=0, inz=0, ind=0
+[2022-12-10 21:01:35.679][Warn][6149][3scw3361][104] client disconnect peer. ret=1007
+[2022-12-10 21:01:35.680][Trace][6149][2e3907vs] TCP: clear zombies=1 resources, conns=3, removing=0, unsubs=0
+[2022-12-10 21:01:35.680][Trace][6149][3scw3361] TCP: disposing #0 resource(HttpsStream)(0x55f56706e980), conns=3, disposing=1, zombies=0
+[2022-12-10 21:01:35.680][Trace][6149][rrg0hv74] TCP: before dispose resource(HttpsStream)(0x55f5670ca4c0), conns=2, zombies=0, ign=0, inz=0, ind=0
+[2022-12-10 21:01:35.680][Warn][6149][rrg0hv74][104] client disconnect peer. ret=1007
+[2022-12-10 21:01:35.680][Trace][6149][2e3907vs] TCP: clear zombies=1 resources, conns=2, removing=0, unsubs=0
+[2022-12-10 21:01:35.680][Trace][6149][rrg0hv74] TCP: disposing #0 resource(HttpsStream)(0x55f5670ca4c0), conns=2, disposing=1, zombies=0
+[2022-12-10 21:01:35.719][Trace][6149][c4w7762g] TCP: before dispose resource(HttpsStream)(0x55f567113870), conns=1, zombies=0, ign=0, inz=0, ind=0
+[2022-12-10 21:01:35.719][Warn][6149][c4w7762g][104] client disconnect peer. ret=1007
+[2022-12-10 21:01:35.719][Trace][6149][2e3907vs] TCP: clear zombies=1 resources, conns=1, removing=0, unsubs=0
+[2022-12-10 21:01:35.719][Trace][6149][c4w7762g] TCP: disposing #0 resource(HttpsStream)(0x55f567113870), conns=1, disposing=1, zombies=0
+[2022-12-10 21:01:39.303][Trace][6149][3icn60qx] Hybrid cpu=0.00%,15MB, cid=1,1, timer=61,0,0, clock=0,37,10,0,1,0,0,0,0
+[2022-12-10 21:01:41.170][Trace][6149][n977892x] TCP: before dispose resource(HttpsConn)(0x55f567070b10), conns=2, zombies=0, ign=0, inz=0, ind=0
+[2022-12-10 21:01:41.170][Error][6149][n977892x][0] serve error code=4042 : start : handshake : handshake r0=-1, r1=1
+thread [6149][n977892x]: do_cycle() [src/app/srs_app_http_conn.cpp:153][errno=0]
+thread [6149][n977892x]: on_start() [src/app/srs_app_http_api.cpp:1106][errno=0]
+thread [6149][n977892x]: handshake() [src/app/srs_app_conn.cpp:713][errno=0]
+[2022-12-10 21:01:41.170][Trace][6149][2e3907vs] TCP: clear zombies=1 resources, conns=2, removing=0, unsubs=0
+[2022-12-10 21:01:41.170][Trace][6149][n977892x] TCP: disposing #0 resource(HttpsConn)(0x55f567070b10), conns=2, disposing=1, zombies=0
+[2022-12-10 21:01:41.170][Trace][6149][x4789371] TCP: before dispose resource(HttpsStream)(0x55f56710af70), conns=1, zombies=0, ign=0, inz=0, ind=0
+[2022-12-10 21:01:41.171][Error][6149][x4789371][0] serve error code=4042 : start : handshake : handshake r0=-1, r1=1
+thread [6149][x4789371]: do_cycle() [src/app/srs_app_http_conn.cpp:153][errno=0]
+thread [6149][x4789371]: on_start() [src/app/srs_app_http_conn.cpp:367][errno=0]
+thread [6149][x4789371]: handshake() [src/app/srs_app_conn.cpp:713][errno=0]
+[2022-12-10 21:01:41.171][Trace][6149][2e3907vs] TCP: clear zombies=1 resources, conns=1, removing=0, unsubs=0
+[2022-12-10 21:01:41.171][Trace][6149][x4789371] TCP: disposing #0 resource(HttpsStream)(0x55f56710af70), conns=1, disposing=1, zombies=0
+[2022-12-10 21:01:41.174][Trace][6149][83459h10] https: api server done, use key ./conf/server.key and cert ./conf/server.crt, cost=3ms
+[2022-12-10 21:01:41.175][Trace][6149][o7759u02] https: stream server done, use key ./conf/server.key and cert ./conf/server.crt, cost=2ms
+[2022-12-10 21:01:41.175][Trace][6149][83459h10] HTTP #0 192.168.152.1:11987 OPTIONS https://192.168.152.131/rtc/v1/publish/, content-length=-1
+[2022-12-10 21:01:41.176][Trace][6149][o7759u02] HTTP #0 192.168.152.1:11988 GET https://192.168.152.131:8088/favicon.ico, content-length=-1
+[2022-12-10 21:01:41.176][Trace][6149][o7759u02] http match file=./objs/nginx/html/favicon.ico, pattern=/, upath=/favicon.ico
+[2022-12-10 21:01:41.177][Trace][6149][o7759u02] TCP: before dispose resource(HttpsStream)(0x55f56706e900), conns=2, zombies=0, ign=0, inz=0, ind=0
+[2022-12-10 21:01:41.177][Warn][6149][o7759u02][104] client disconnect peer. ret=1007
+[2022-12-10 21:01:41.177][Trace][6149][2e3907vs] TCP: clear zombies=1 resources, conns=2, removing=0, unsubs=0
+[2022-12-10 21:01:41.177][Trace][6149][o7759u02] TCP: disposing #0 resource(HttpsStream)(0x55f56706e900), conns=2, disposing=1, zombies=0
+[2022-12-10 21:01:41.178][Trace][6149][83459h10] HTTP #1 192.168.152.1:11987 POST https://192.168.152.131/rtc/v1/publish/, content-length=6051
+[2022-12-10 21:01:41.179][Trace][6149][83459h10] RTC publish webrtc://192.168.152.131/live/livestream, api=https://192.168.152.131:443/rtc/v1/publish/, tid=4ccfd9c, clientip=192.168.152.1, app=live, stream=livestream, offer=5558B, eip=, codec=
+[2022-12-10 21:01:41.179][Trace][6149][83459h10] ignore attribute=, value=
+[2022-12-10 21:01:41.179][Trace][6149][83459h10] new source, stream_url=/live/livestream
+[2022-12-10 21:01:41.180][Trace][6149][83459h10] RTC publisher nack=1, nnc=1, pt-drop=0, twcc=1/3
+[2022-12-10 21:01:41.180][Trace][6149][83459h10] RTC: Init tracks {track: d9714113-653e-48e7-9f9e-39f456505ed5, is_active: 0=>1},{track: ad16f660-985e-43cd-9f86-c6db03e54844, is_active: 0=>1}, ok
+[2022-12-10 21:01:41.180][Trace][6149][83459h10] Best matched ip=192.168.152.131, ifname=ens33
+[2022-12-10 21:01:41.180][Trace][6149][83459h10] RTC: Use candidates 192.168.152.131
+[2022-12-10 21:01:41.180][Trace][6149][83459h10] RTC init session, user=90967285:HHGq, url=/live/livestream, encrypt=1/1, DTLS(role=passive, version=auto), timeout=30000ms, nack=1
+[2022-12-10 21:01:41.180][Trace][6149][83459h10] RTC username=90967285:HHGq, offer=5558B, answer=1459B
+[2022-12-10 21:01:41.180][Trace][6149][83459h10] RTC remote offer: v=0\r\no=- 2511441162229209923 2 IN IP4 127.0.0.1\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0 1\r\na=extmap-allow-mixed\r\na=msid-semantic: WMS\r\nm=audio 9 UDP/TLS/RTP/SAVPF 111 63 103 104 9 0 8 106 105 13 110 112 113 126\r\nc=IN IP4 0.0.0.0\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=ice-ufrag:HHGq\r\na=ice-pwd:5h1iITk8e9h3/biuEBUybPhL\r\na=ice-options:trickle\r\na=fingerprint:sha-256 D3:6A:E2:6B:82:67:56:AC:43:48:8B:14:93:4C:9A:31:1A:86:4F:D6:80:2C:62:5C:31:6A:B4:39:18:EE:00:83\r\na=setup:actpass\r\na=mid:0\r\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\na=extmap:2 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\r\na=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\na=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\na=sendonly\r\na=msid:- ad16f660-985e-43cd-9f86-c6db03e54844\r\na=rtcp-mux\r\na=rtpmap:111 opus/48000/2\r\na=rtcp-fb:111 transport-cc\r\na=fmtp:111 minptime=10;useinbandfec=1\r\na=rtpmap:63 red/48000/2\r\na=fmtp:63 111/111\r\na=rtpmap:103 ISAC/16000\r\na=rtpmap:104 ISAC/32000\r\na=rtpmap:9 G722/8000\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=rtpmap:106 CN/32000\r\na=rtpmap:105 CN/16000\r\na=rtpmap:13 CN/8000\r\na=rtpmap:110 telephone-event/48000\r\na=rtpmap:112 telephone-event/32000\r\na=rtpmap:113 telephone-event/16000\r\na=rtpmap:126 telephone-event/8000\r\na=ssrc:3667122045 cname:WoAyIJuXL1DDyq1e\r\na=ssrc:3667122045 msid:- ad16f660-985e-43cd-9f86-c6db03e54844\r\nm=video 9 UDP/TLS/RTP/SAVPF 96 97 102 122 127 121 125 107 108 109 124 120 39 40 45 46 98 99 100 101 123 119 114 115 116\r\nc=IN IP4 0.0.0.0\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=ice-ufrag:HHGq\r\na=ice-pwd:5h1iITk8e9h3/biuEBUybPhL\r\na=ice-options:trickle\r\na=fingerprint:sha-256 D3:6A:E2:6B:82:67:56:AC:43:48:8B:14:93:4C:9A:31:1A:86:4F:D6:80:2C:62:5C:31:6A:B4:39:18:EE:00:83\r\na=setup:actpass\r\na=mid:1\r\na=extmap:14 urn:ietf:params:rtp-hdrext:toffset\r\na=extmap:2 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\r\na=extmap:13 urn:3gpp:video-orientation\r\na=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\na=extmap:5 http://www.webrtc.org/experiments/rtp-hdrext/playout-delay\r\na=extmap:6 http://www.webrtc.org/experiments/rtp-hdrext/video-content-type\r\na=extmap:7 http://www.webrtc.org/experiments/rtp-hdrext/video-timing\r\na=extmap:8 http://www.webrtc.org/experiments/rtp-hdrext/color-space\r\na=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\na=extmap:10 urn:ietf:params:rtp-hdrext:sdes:rtp-stream-id\r\na=extmap:11 urn:ietf:params:rtp-hdrext:sdes:repaired-rtp-stream-id\r\na=sendonly\r\na=msid:- d9714113-653e-48e7-9f9e-39f456505ed5\r\na=rtcp-mux\r\na=rtcp-rsize\r\na=rtpmap:96 VP8/90000\r\na=rtcp-fb:96 goog-remb\r\na=rtcp-fb:96 transport-cc\r\na=rtcp-fb:96 ccm fir\r\na=rtcp-fb:96 nack\r\na=rtcp-fb:96 nack pli\r\na=rtpmap:97 rtx/90000\r\na=fmtp:97 apt=96\r\na=rtpmap:102 H264/90000\r\na=rtcp-fb:102 goog-remb\r\na=rtcp-fb:102 transport-cc\r\na=rtcp-fb:102 ccm fir\r\na=rtcp-fb:102 nack\r\na=rtcp-fb:102 nack pli\r\na=fmtp:102 level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=42001f\r\na=rtpmap:122 rtx/90000\r\na=fmtp:122 apt=102\r\na=rtpmap:127 H264/90000\r\na=rtcp-fb:127 goog-remb\r\na=rtcp-fb:127 transport-cc\r\na=rtcp-fb:127 ccm fir\r\na=rtcp-fb:127 nack\r\na=rtcp-fb:127 nack pli\r\na=fmtp:127 level-asymmetry-allowed=1;packetization-mode=0;profile-level-id=42001f\r\na=rtpmap:121 rtx/90000\r\na=fmtp:121 apt=127\r\na=rtpmap:125 H264/90000\r\na=rtcp-fb:125 goog-remb\r\na=rtcp-fb:125 transport-cc\r\na=rtcp-fb:125 ccm fir\r\na=rtcp-fb:125 nack\r\na=rtcp-fb:125 nack pli\r\na=fmtp:125 level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=42e01f\r\na=rtpmap:107 rtx/90000\r\na=fmtp:107 apt=125\r\na=rtpmap:108 H264/90000\r\na=rtcp-fb:108 goog-remb\r\na=rtcp-fb:108 transport-cc\r\na=rtcp-fb:108 ccm fir\r\na=rtcp-fb:108 nack\r\na=rtcp-fb:108 nack pli\r\na=fmtp:108 level-asymmetry-allowed=1;packetization-mode=0;profile-level-id=42e01f\r\na=rtpmap:109 rtx/90000\r\na=fmtp:109 apt=108\r\na=rtpmap:124 H264/90000\r\na=rtcp-fb:124 goog-remb\r\na=rtcp-fb:124 transport-cc\r\na=rtcp-fb:124 ccm fir\r\na=rtcp-fb:124 nack\r\na=rtcp-fb:124 nack pli\r\na=fmtp:124 level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=4d001f\r\na=rtpmap:120 rtx/90000\r\na=fmtp:120 apt=124\r\na=rtpmap:39 H264/90000\r\na=rtcp-fb:39 goog-remb\r\na=rtcp-fb:39 transport-cc\r\na=rtcp-fb:39 ccm fir\r\na=rtcp-fb:39 nack\r\na=rtcp-fb:39 nack pli\r\na=fmtp:39 level-asymmetry-allowed=1;packetization-mode=0;profile-level-id=4d001f\r\na=rtpmap:40 rtx/90000\r\na=fmtp:40 apt=39\r\na=rtpmap:45 AV1/90000\r\na=rtcp-fb:45 goog-remb\r\na=rtcp-fb:45 transport-cc\r\na=rtcp-fb:45 ccm fir\r\na=rtcp-fb:45 nack\r\na=rtcp-fb:45 nack pli\r\na=rtpmap:46 rtx/90000\r\na=fmtp:46 apt=45\r\na=rtpmap:98 VP9/90000\r\na=rtcp-fb:98 goog-remb\r\na=rtcp-fb:98 transport-cc\r\na=rtcp-fb:98 ccm fir\r\na=rtcp-fb:98 nack\r\na=rtcp-fb:98 nack pli\r\na=fmtp:98 profile-id=0\r\na=rtpmap:99 rtx/90000\r\na=fmtp:99 apt=98\r\na=rtpmap:100 VP9/90000\r\na=rtcp-fb:100 goog-remb\r\na=rtcp-fb:100 transport-cc\r\na=rtcp-fb:100 ccm fir\r\na=rtcp-fb:100 nack\r\na=rtcp-fb:100 nack pli\r\na=fmtp:100 profile-id=2\r\na=rtpmap:101 rtx/90000\r\na=fmtp:101 apt=100\r\na=rtpmap:123 H264/90000\r\na=rtcp-fb:123 goog-remb\r\na=rtcp-fb:123 transport-cc\r\na=rtcp-fb:123 ccm fir\r\na=rtcp-fb:123 nack\r\na=rtcp-fb:123 nack pli\r\na=fmtp:123 level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=64001f\r\na=rtpmap:119 rtx/90000\r\na=fmtp:119 apt=123\r\na=rtpmap:114 red/90000\r\na=rtpmap:115 rtx/90000\r\na=fmtp:115 apt=114\r\na=rtpmap:116 ulpfec/90000\r\na=ssrc-group:FID 3316351587 1627400107\r\na=ssrc:3316351587 cname:WoAyIJuXL1DDyq1e\r\na=ssrc:3316351587 msid:- d9714113-653e-48e7-9f9e-39f456505ed5\r\na=ssrc:1627400107 cname:WoAyIJuXL1DDyq1e\r\na=ssrc:1627400107 msid:- d9714113-653e-48e7-9f9e-39f456505ed5\r\n
+[2022-12-10 21:01:41.180][Trace][6149][83459h10] RTC local answer: v=0\r\no=SRS/4.0.267(Leo) 94512484314272 2 IN IP4 0.0.0.0\r\ns=SRSPublishSession\r\nt=0 0\r\na=ice-lite\r\na=group:BUNDLE 0 1\r\na=msid-semantic: WMS live/livestream\r\nm=audio 9 UDP/TLS/RTP/SAVPF 111\r\nc=IN IP4 0.0.0.0\r\na=ice-ufrag:90967285\r\na=ice-pwd:60f2x7cme9773nk3435150513160l847\r\na=fingerprint:sha-256 2A:E8:48:9B:EC:29:F1:7B:C8:03:9F:DF:3C:10:33:89:69:BC:E5:BA:40:E6:56:DB:1F:92:47:0D:F2:26:74:95\r\na=setup:passive\r\na=mid:0\r\na=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\na=recvonly\r\na=rtcp-mux\r\na=rtcp-rsize\r\na=rtpmap:111 opus/48000/2\r\na=rtcp-fb:111 transport-cc\r\na=fmtp:111 minptime=10;useinbandfec=1\r\na=candidate:0 1 udp 2130706431 192.168.152.131 8000 typ host generation 0\r\nm=video 9 UDP/TLS/RTP/SAVPF 125 114\r\nc=IN IP4 0.0.0.0\r\na=ice-ufrag:90967285\r\na=ice-pwd:60f2x7cme9773nk3435150513160l847\r\na=fingerprint:sha-256 2A:E8:48:9B:EC:29:F1:7B:C8:03:9F:DF:3C:10:33:89:69:BC:E5:BA:40:E6:56:DB:1F:92:47:0D:F2:26:74:95\r\na=setup:passive\r\na=mid:1\r\na=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\na=recvonly\r\na=rtcp-mux\r\na=rtcp-rsize\r\na=rtpmap:125 H264/90000\r\na=rtcp-fb:125 transport-cc\r\na=rtcp-fb:125 nack\r\na=rtcp-fb:125 nack pli\r\na=fmtp:125 level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=42e01f\r\na=rtpmap:114 red/90000\r\na=candidate:0 1 udp 2130706431 192.168.152.131 8000 typ host generation 0\r\n
+[2022-12-10 21:01:41.181][Trace][6149][83459h10] TCP: before dispose resource(HttpsConn)(0x55f56710afc0), conns=1, zombies=0, ign=0, inz=0, ind=0
+[2022-12-10 21:01:41.182][Warn][6149][83459h10][104] client disconnect peer. ret=1007
+[2022-12-10 21:01:41.182][Trace][6149][2e3907vs] TCP: clear zombies=1 resources, conns=1, removing=0, unsubs=0
+[2022-12-10 21:01:41.182][Trace][6149][83459h10] TCP: disposing #0 resource(HttpsConn)(0x55f56710afc0), conns=1, disposing=1, zombies=0
+[2022-12-10 21:01:41.187][Trace][6149][83459h10] RTC: session address init 192.168.152.1:64596
+[2022-12-10 21:01:41.187][Trace][6149][83459h10] RTC: session STUN done, waiting DTLS handshake.
+[2022-12-10 21:01:41.187][Trace][6149][9972126l] <- RTC RECV #13, udp 1, pps 0/0, schedule 1
+[2022-12-10 21:01:41.188][Trace][6149][83459h10] DTLS: State Passive RECV, done=0, arq=0/0, r0=1, r1=0, len=157, cnt=22, size=144, hs=1
+[2022-12-10 21:01:41.189][Trace][6149][83459h10] DTLS: State Passive SEND, done=0, arq=0/0, r0=-1, r1=2, len=680, cnt=22, size=82, hs=2
+[2022-12-10 21:01:41.190][Trace][6149][83459h10] DTLS: State Passive RECV, done=0, arq=0/0, r0=1, r1=0, len=578, cnt=22, size=299, hs=11
+[2022-12-10 21:01:41.190][Trace][6149][83459h10] DTLS: State Passive SEND, done=1, arq=0/0, r0=1, r1=0, len=554, cnt=22, size=466, hs=4
+[2022-12-10 21:01:41.190][Trace][6149][83459h10] RTC: DTLS handshake done.
+[2022-12-10 21:01:41.190][Trace][6149][83459h10] RTC: session pub=1, sub=0, to=30000ms connection established
+[2022-12-10 21:01:41.190][Trace][6149][83459h10] RTC: Publisher url=/live/livestream established
+[2022-12-10 21:01:44.305][Trace][6149][3icn60qx] Hybrid cpu=1.00%,15MB, cid=18,10, timer=61,2,10, clock=0,37,10,1,0,0,0,0,0, free=1, objs=(pkt:25,raw:12,fua:13,msg:25,oth:1,buf:25)
+[2022-12-10 21:01:44.305][Trace][6149][3icn60qx] RTC: Server conns=1
+[2022-12-10 21:01:49.305][Trace][6149][3icn60qx] Hybrid cpu=1.00%,16MB, cid=18,10, timer=61,2,10, clock=0,37,10,1,0,0,0,0,0, free=1, objs=(pkt:25,raw:12,fua:13,msg:25,oth:1,buf:25)
+[2022-12-10 21:01:49.305][Trace][6149][3icn60qx] RTC: Server conns=1
+[2022-12-10 21:01:51.207][Trace][6149][9972126l] <- RTC RECV #13, udp 1248, pps 33/124, schedule 1248
+[2022-12-10 21:01:54.306][Trace][6149][3icn60qx] Hybrid cpu=1.00%,16MB, cid=1,2, timer=61,10,47, clock=0,30,17,0,0,0,0,0,0, objs=(pkt:117,raw:49,fua:67,msg:117,oth:0,buf:117)
+[2022-12-10 21:01:54.306][Trace][6149][3icn60qx] RTC: Server conns=1, rpkts=(119,rtp:117,stun:1,rtcp:1), spkts=(14,rtp:0,stun:1,rtcp:23), rtcp=(pli:0,twcc:9,rr:1), snk=(95,a:47,v:47,h:0), fid=(id:0,fid:119,ffid:0,addr:1,faddr:119)
+[2022-12-10 21:01:55.069][Trace][6149][n3503683] TCP: before dispose resource(HttpsConn)(0x55f567180000), conns=2, zombies=0, ign=0, inz=0, ind=0
+[2022-12-10 21:01:55.070][Error][6149][n3503683][0] serve error code=4042 : start : handshake : handshake r0=-1, r1=1
+thread [6149][n3503683]: do_cycle() [src/app/srs_app_http_conn.cpp:153][errno=0]
+thread [6149][n3503683]: on_start() [src/app/srs_app_http_api.cpp:1106][errno=0]
+thread [6149][n3503683]: handshake() [src/app/srs_app_conn.cpp:713][errno=0]
+[2022-12-10 21:01:55.070][Trace][6149][4xd744j8] TCP: before dispose resource(HttpsConn)(0x55f5672e9400), conns=2, zombies=1, ign=0, inz=0, ind=0
+[2022-12-10 21:01:55.070][Error][6149][4xd744j8][0] serve error code=4042 : start : handshake : handshake r0=-1, r1=1
+thread [6149][4xd744j8]: do_cycle() [src/app/srs_app_http_conn.cpp:153][errno=0]
+thread [6149][4xd744j8]: on_start() [src/app/srs_app_http_api.cpp:1106][errno=0]
+thread [6149][4xd744j8]: handshake() [src/app/srs_app_conn.cpp:713][errno=0]
+[2022-12-10 21:01:55.070][Trace][6149][2e3907vs] TCP: clear zombies=2 resources, conns=2, removing=0, unsubs=0
+[2022-12-10 21:01:55.070][Trace][6149][n3503683] TCP: disposing #0 resource(HttpsConn)(0x55f567180000), conns=2, disposing=2, zombies=0
+[2022-12-10 21:01:55.070][Trace][6149][4xd744j8] TCP: disposing #1 resource(HttpsConn)(0x55f5672e9400), conns=1, disposing=2, zombies=0
+[2022-12-10 21:01:55.074][Trace][6149][6f890ss8] https: api server done, use key ./conf/server.key and cert ./conf/server.crt, cost=1ms
+[2022-12-10 21:01:55.074][Trace][6149][6f890ss8] HTTP #0 192.168.152.1:11991 GET https://192.168.152.131/rtc/v1/nack/?drop=1&username=90967285:HHGq, content-length=-1
+[2022-12-10 21:01:55.081][Trace][6149][83459h10] DTLS: State Passive RECV, done=1, arq=0/0, r0=1, r1=0, len=39, cnt=21, size=26, hs=0
+[2022-12-10 21:01:55.081][Warn][6149][83459h10][0] DTLS: SSL3 alert method=read type=warning, desc=CN(close notify), where=16388, ret=256, r1=0
+[2022-12-10 21:01:55.081][Trace][6149][83459h10] RTC: session destroy by DTLS alert, username=90967285:HHGq
+[2022-12-10 21:01:55.081][Trace][6149][83459h10] RTC: before dispose resource(RtcConn)(0x55f5670deca0), conns=1, zombies=0, ign=0, inz=0, ind=0
+[2022-12-10 21:01:55.081][Trace][6149][83459h10] RTC: session detach from [83459h10](RtcConn), disposing=1
+[2022-12-10 21:01:55.081][Trace][6149][b2625x6f] RTC: clear zombies=1 resources, conns=1, removing=0, unsubs=0
+[2022-12-10 21:01:55.081][Trace][6149][83459h10] RTC: disposing #0 resource(RtcConn)(0x55f5670deca0), conns=1, disposing=1, zombies=0
+[2022-12-10 21:01:55.081][Trace][6149][83459h10] cleanup when unpublish, created=1, deliver=1
+[2022-12-10 21:01:55.329][Trace][6149][6f890ss8] HTTP #1 192.168.152.1:11991 GET https://192.168.152.131/favicon.ico, content-length=-1
+[2022-12-10 21:01:59.307][Trace][6149][3icn60qx] Hybrid cpu=0.00%,16MB, cid=1,2, timer=61,10,47, clock=0,30,17,0,0,0,0,0,0, objs=(pkt:117,raw:49,fua:67,msg:117,oth:0,buf:117)
+[2022-12-10 21:02:03.281][Trace][6149][6f890ss8] TCP: before dispose resource(HttpsConn)(0x55f567089b70), conns=1, zombies=0, ign=0, inz=0, ind=0
+[2022-12-10 21:02:03.281][Warn][6149][6f890ss8][104] client disconnect peer. ret=1007
+[2022-12-10 21:02:03.282][Trace][6149][2e3907vs] TCP: clear zombies=1 resources, conns=1, removing=0, unsubs=0
+[2022-12-10 21:02:03.282][Trace][6149][6f890ss8] TCP: disposing #0 resource(HttpsConn)(0x55f567089b70), conns=1, disposing=1, zombies=0
+[2022-12-10 21:02:04.308][Trace][6149][3icn60qx] Hybrid cpu=0.00%,16MB, cid=1,2, timer=61,10,47, clock=0,30,17,0,0,0,0,0,0, objs=(pkt:117,raw:49,fua:67,msg:117,oth:0,buf:117)
+[2022-12-10 21:02:09.308][Trace][6149][3icn60qx] Hybrid cpu=1.00%,16MB, cid=3,2, timer=61,1,2, clock=0,35,12,0,0,0,0,0,0, free=1, objs=(pkt:3,raw:3,fua:1,msg:3,oth:0,buf:3)
+[2022-12-10 21:02:14.308][Trace][6149][3icn60qx] Hybrid cpu=0.00%,16MB, cid=3,2, timer=61,1,2, clock=0,35,12,0,0,0,0,0,0, free=1, objs=(pkt:3,raw:3,fua:1,msg:3,oth:0,buf:3)
+[2022-12-10 21:02:19.308][Trace][6149][3icn60qx] Hybrid cpu=0.00%,16MB, cid=1,0, timer=61,0,0, clock=0,36,11,0,1,1,0,0,0
+[2022-12-10 21:02:24.309][Trace][6149][3icn60qx] Hybrid cpu=0.00%,16MB, cid=1,0, timer=61,0,0, clock=0,36,11,0,1,1,0,0,0
+[2022-12-10 21:02:29.311][Trace][6149][3icn60qx] Hybrid cpu=0.00%,16MB, cid=1,0, timer=61,0,0, clock=0,38,9,0,0,0,0,0,0
+[2022-12-10 21:02:34.312][Trace][6149][3icn60qx] Hybrid cpu=0.00%,16MB, cid=1,0, timer=61,0,0, clock=0,38,9,0,0,0,0,0,0
+[2022-12-10 21:02:39.312][Trace][6149][3icn60qx] Hybrid cpu=0.00%,16MB, cid=1,0, timer=61,0,0, clock=0,38,9,0,0,0,0,0,0
+[2022-12-10 21:02:44.312][Trace][6149][3icn60qx] Hybrid cpu=0.00%,16MB, cid=1,0, timer=61,0,0, clock=0,37,11,1,0,0,0,0,0
+[2022-12-10 21:02:49.313][Trace][6149][3icn60qx] Hybrid cpu=0.00%,16MB, cid=1,0, timer=61,0,0, clock=0,37,11,1,0,0,0,0,0
+[2022-12-10 21:02:54.314][Trace][6149][3icn60qx] Hybrid cpu=0.00%,16MB, cid=1,0, timer=62,0,0, clock=0,36,11,0,0,0,0,0,0
+[2022-12-10 21:02:59.316][Trace][6149][3icn60qx] Hybrid cpu=0.00%,16MB, cid=1,0, timer=62,0,0, clock=0,36,11,0,0,0,0,0,0
+[2022-12-10 21:03:04.318][Trace][6149][3icn60qx] Hybrid cpu=0.00%,16MB, cid=1,0, timer=62,0,0, clock=0,36,11,0,0,0,0,0,0
+[2022-12-10 21:03:09.319][Trace][6149][3icn60qx] Hybrid cpu=0.00%,16MB, cid=1,0, timer=61,0,0, clock=0,38,10,0,0,0,0,0,0
+[2022-12-10 21:03:14.320][Trace][6149][3icn60qx] Hybrid cpu=0.00%,16MB, cid=1,0, timer=61,0,0, clock=0,38,10,0,0,0,0,0,0
+[2022-12-10 21:03:19.321][Trace][6149][3icn60qx] Hybrid cpu=2.00%,16MB, cid=1,0, timer=61,0,0, clock=0,36,11,0,0,0,0,0,0
+[2022-12-10 21:03:24.323][Trace][6149][3icn60qx] Hybrid cpu=0.00%,16MB, cid=1,0, timer=61,0,0, clock=0,36,11,0,0,0,0,0,0
+[2022-12-10 21:03:29.324][Trace][6149][3icn60qx] Hybrid cpu=0.00%,16MB, cid=1,0, timer=61,0,0, clock=0,38,9,0,0,0,0,0,0
+[2022-12-10 21:03:34.324][Trace][6149][3icn60qx] Hybrid cpu=0.00%,16MB, cid=1,0, timer=61,0,0, clock=0,38,9,0,0,0,0,0,0
+[2022-12-10 21:03:39.324][Trace][6149][3icn60qx] Hybrid cpu=0.00%,16MB, cid=1,0, timer=61,0,0, clock=0,38,9,0,0,0,0,0,0
+[2022-12-10 21:03:44.325][Trace][6149][3icn60qx] Hybrid cpu=0.00%,16MB, cid=1,0, timer=61,0,0, clock=0,38,10,0,0,0,0,0,0
+[2022-12-10 21:03:49.326][Trace][6149][3icn60qx] Hybrid cpu=0.00%,16MB, cid=1,0, timer=61,0,0, clock=0,38,10,0,0,0,0,0,0
