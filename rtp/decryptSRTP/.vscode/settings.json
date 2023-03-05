@@ -1,0 +1,11 @@
+{
+    "cmake.debugConfig": {
+        "args": ["/home/fengpeng/program/decryptSRTP/file/push.pcapng", 
+        "/home/fengpeng/program/decryptSRTP/file/srtp_recv_1_58f441d1-99a6-4f2b-945f-d916919e5a5d.key", 
+        "1", 
+        "/home/fengpeng/program/decryptSRTP/file/srtp_send_1_58f441d1-99a6-4f2b-945f-d916919e5a5d.key", 
+        "1",
+        "/home/fengpeng/program/decryptSRTP/file/out.pcapng", 
+        "56229"]
+    }
+}

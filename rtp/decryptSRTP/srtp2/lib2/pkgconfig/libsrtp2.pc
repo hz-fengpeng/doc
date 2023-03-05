@@ -1,0 +1,11 @@
+prefix=/home/fengpeng/srs-4.0release/trunk/objs/Platform-Linux-4.15.0-GCC7.5.0-SRS4-x86_64/libsrtp-2-fit/_release
+exec_prefix=/home/fengpeng/srs-4.0release/trunk/objs/Platform-Linux-4.15.0-GCC7.5.0-SRS4-x86_64/libsrtp-2-fit/_release
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: libsrtp2
+Version: 2.3.0
+Description: Library for SRTP (Secure Realtime Transport Protocol)
+
+Libs: -L${libdir} -lsrtp2 -L/home/fengpeng/srs-4.0release/trunk/objs/Platform-Linux-4.15.0-GCC7.5.0-SRS4-x86_64/openssl-1.1-fit/_release/lib -lcrypto -ldl 
+Cflags: -I${includedir}
