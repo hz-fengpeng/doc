@@ -1,0 +1,697 @@
+join的时候就告诉对方拉流时的pt值
+{
+	"request": true,
+	"id": 1584236,
+	"method": "join",
+	"data": {
+		"displayName": "Araquanid",
+		"device": {
+			"flag": "chrome",
+			"name": "Chrome",
+			"version": "110.0.0.0"
+		},
+		"rtpCapabilities": {
+			"codecs": [
+				{
+					"mimeType": "audio/opus",
+					"kind": "audio",
+					"preferredPayloadType": 100,
+					"clockRate": 48000,
+					"channels": 2,
+					"parameters": {
+						"minptime": 10,
+						"useinbandfec": 1
+					},
+					"rtcpFeedback": [
+						{
+							"type": "transport-cc",
+							"parameter": ""
+						},
+						{
+							"type": "nack",
+							"parameter": ""
+						}
+					]
+				},
+				{
+					"mimeType": "video/H264",
+					"kind": "video",
+					"preferredPayloadType": 101,
+					"clockRate": 90000,
+					"parameters": {
+						"level-asymmetry-allowed": 1,
+						"packetization-mode": 1,
+						"profile-level-id": "4d001f"
+					},
+					"rtcpFeedback": [
+						{
+							"type": "goog-remb",
+							"parameter": ""
+						},
+						{
+							"type": "transport-cc",
+							"parameter": ""
+						},
+						{
+							"type": "ccm",
+							"parameter": "fir"
+						},
+						{
+							"type": "nack",
+							"parameter": ""
+						},
+						{
+							"type": "nack",
+							"parameter": "pli"
+						}
+					]
+				},
+				{
+					"mimeType": "video/rtx",
+					"kind": "video",
+					"preferredPayloadType": 102,
+					"clockRate": 90000,
+					"parameters": {
+						"apt": 101
+					},
+					"rtcpFeedback": []
+				},
+				{
+					"mimeType": "video/H264",
+					"kind": "video",
+					"preferredPayloadType": 103,
+					"clockRate": 90000,
+					"parameters": {
+						"level-asymmetry-allowed": 1,
+						"packetization-mode": 1,
+						"profile-level-id": "42e01f"
+					},
+					"rtcpFeedback": [
+						{
+							"type": "goog-remb",
+							"parameter": ""
+						},
+						{
+							"type": "transport-cc",
+							"parameter": ""
+						},
+						{
+							"type": "ccm",
+							"parameter": "fir"
+						},
+						{
+							"type": "nack",
+							"parameter": ""
+						},
+						{
+							"type": "nack",
+							"parameter": "pli"
+						}
+					]
+				},
+				{
+					"mimeType": "video/rtx",
+					"kind": "video",
+					"preferredPayloadType": 104,
+					"clockRate": 90000,
+					"parameters": {
+						"apt": 103
+					},
+					"rtcpFeedback": []
+				}
+			],
+			"headerExtensions": [
+				{
+					"kind": "audio",
+					"uri": "urn:ietf:params:rtp-hdrext:sdes:mid",
+					"preferredId": 1,
+					"preferredEncrypt": false,
+					"direction": "sendrecv"
+				},
+				{
+					"kind": "video",
+					"uri": "urn:ietf:params:rtp-hdrext:sdes:mid",
+					"preferredId": 1,
+					"preferredEncrypt": false,
+					"direction": "sendrecv"
+				},
+				{
+					"kind": "audio",
+					"uri": "http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time",
+					"preferredId": 4,
+					"preferredEncrypt": false,
+					"direction": "sendrecv"
+				},
+				{
+					"kind": "video",
+					"uri": "http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time",
+					"preferredId": 4,
+					"preferredEncrypt": false,
+					"direction": "sendrecv"
+				},
+				{
+					"kind": "video",
+					"uri": "http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01",
+					"preferredId": 5,
+					"preferredEncrypt": false,
+					"direction": "sendrecv"
+				},
+				{
+					"kind": "audio",
+					"uri": "urn:ietf:params:rtp-hdrext:ssrc-audio-level",
+					"preferredId": 10,
+					"preferredEncrypt": false,
+					"direction": "sendrecv"
+				},
+				{
+					"kind": "video",
+					"uri": "urn:3gpp:video-orientation",
+					"preferredId": 11,
+					"preferredEncrypt": false,
+					"direction": "sendrecv"
+				},
+				{
+					"kind": "video",
+					"uri": "urn:ietf:params:rtp-hdrext:toffset",
+					"preferredId": 12,
+					"preferredEncrypt": false,
+					"direction": "sendrecv"
+				}
+			]
+		},
+		"sctpCapabilities": {
+			"numStreams": {
+				"OS": 1024,
+				"MIS": 1024
+			}
+		}
+	}
+}
+
+// product
+//57085
+
+{
+	"request": true,
+	"id": 1069121,
+	"method": "produce",
+	"data": {
+		"transportId": "657fa1f9-5001-4d52-b9c4-cb12dc2fad1d",
+		"kind": "audio",
+		"rtpParameters": {
+			"codecs": [
+				{
+					"mimeType": "audio/opus",
+					"payloadType": 111,
+					"clockRate": 48000,
+					"channels": 2,
+					"parameters": {
+						"minptime": 10,
+						"useinbandfec": 1,
+						"sprop-stereo": 1,
+						"usedtx": 1
+					},
+					"rtcpFeedback": [
+						{
+							"type": "transport-cc",
+							"parameter": ""
+						},
+						{
+							"type": "nack",
+							"parameter": ""
+						}
+					]
+				}
+			],
+			"headerExtensions": [
+				{
+					"uri": "urn:ietf:params:rtp-hdrext:sdes:mid",
+					"id": 4,
+					"encrypt": false,
+					"parameters": {}
+				},
+				{
+					"uri": "http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time",
+					"id": 2,
+					"encrypt": false,
+					"parameters": {}
+				},
+				{
+					"uri": "http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01",
+					"id": 3,
+					"encrypt": false,
+					"parameters": {}
+				},
+				{
+					"uri": "urn:ietf:params:rtp-hdrext:ssrc-audio-level",
+					"id": 1,
+					"encrypt": false,
+					"parameters": {}
+				}
+			],
+			"encodings": [
+				{
+					"ssrc": 3733285760,
+					"dtx": false
+				}
+			],
+			"rtcp": {
+				"cname": "VTEdzV/Y9oSCbjat",
+				"reducedSize": true
+			},
+			"mid": "0"
+		},
+		"appData": {}
+	}
+}
+
+{
+	"request": true,
+	"id": 1746969,
+	"method": "produce",
+	"data": {
+		"transportId": "657fa1f9-5001-4d52-b9c4-cb12dc2fad1d",
+		"kind": "video",
+		"rtpParameters": {
+			"codecs": [
+				{
+					"mimeType": "video/H264",
+					"payloadType": 127,
+					"clockRate": 90000,
+					"parameters": {
+						"level-asymmetry-allowed": 1,
+						"packetization-mode": 1,
+						"profile-level-id": "4d001f"
+					},
+					"rtcpFeedback": [
+						{
+							"type": "goog-remb",
+							"parameter": ""
+						},
+						{
+							"type": "transport-cc",
+							"parameter": ""
+						},
+						{
+							"type": "ccm",
+							"parameter": "fir"
+						},
+						{
+							"type": "nack",
+							"parameter": ""
+						},
+						{
+							"type": "nack",
+							"parameter": "pli"
+						}
+					]
+				},
+				{
+					"mimeType": "video/rtx",
+					"payloadType": 125,
+					"clockRate": 90000,
+					"parameters": {
+						"apt": 127
+					},
+					"rtcpFeedback": []
+				}
+			],
+			"headerExtensions": [
+				{
+					"uri": "urn:ietf:params:rtp-hdrext:sdes:mid",
+					"id": 4,
+					"encrypt": false,
+					"parameters": {}
+				},
+				{
+					"uri": "urn:ietf:params:rtp-hdrext:sdes:rtp-stream-id",
+					"id": 10,
+					"encrypt": false,
+					"parameters": {}
+				},
+				{
+					"uri": "urn:ietf:params:rtp-hdrext:sdes:repaired-rtp-stream-id",
+					"id": 11,
+					"encrypt": false,
+					"parameters": {}
+				},
+				{
+					"uri": "http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time",
+					"id": 2,
+					"encrypt": false,
+					"parameters": {}
+				},
+				{
+					"uri": "http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01",
+					"id": 3,
+					"encrypt": false,
+					"parameters": {}
+				},
+				{
+					"uri": "urn:3gpp:video-orientation",
+					"id": 13,
+					"encrypt": false,
+					"parameters": {}
+				},
+				{
+					"uri": "urn:ietf:params:rtp-hdrext:toffset",
+					"id": 14,
+					"encrypt": false,
+					"parameters": {}
+				}
+			],
+			"encodings": [
+				{
+					"active": true,
+					"scalabilityMode": "L1T3",
+					"scaleResolutionDownBy": 4,
+					"maxBitrate": 500000,
+					"rid": "r0",
+					"dtx": false
+				},
+				{
+					"active": true,
+					"scalabilityMode": "L1T3",
+					"scaleResolutionDownBy": 2,
+					"maxBitrate": 1000000,
+					"rid": "r1",
+					"dtx": false
+				},
+				{
+					"active": true,
+					"scalabilityMode": "L1T3",
+					"scaleResolutionDownBy": 1,
+					"maxBitrate": 5000000,
+					"rid": "r2",
+					"dtx": false
+				}
+			],
+			"rtcp": {
+				"cname": "",
+				"reducedSize": true
+			},
+			"mid": "2"
+		},
+		"appData": {}
+	}
+}
+
+{
+	"response": true,
+	"id": 1113164,
+	"ok": true,
+	"data": {
+		"id": "657fa1f9-5001-4d52-b9c4-cb12dc2fad1d",
+		"iceParameters": {
+			"iceLite": true,
+			"password": "febol0swbd435ewy8nwdqlttsad0e393",
+			"usernameFragment": "xo16ryay5vexfw6k29m3srn3uo3ms1bl"
+		},
+		"iceCandidates": [
+			{
+				"foundation": "udpcandidate",
+				"ip": "192.168.102.62",
+				"port": 44444,
+				"priority": 1076302079,
+				"protocol": "udp",
+				"type": "host"
+			}
+		],
+		"dtlsParameters": {
+			"fingerprints": [
+				{
+					"algorithm": "sha-224",
+					"value": "63:3F:1B:A6:37:3D:72:A6:26:AB:B7:C8:2E:1F:E4:99:A9:9C:87:44:A9:15:84:D6:8F:57:59:84"
+				},
+				{
+					"algorithm": "sha-384",
+					"value": "CF:7F:92:97:56:9B:D7:03:D8:E0:C0:9A:8A:4E:CB:82:30:92:5E:BE:98:9B:E5:7F:16:90:D8:FA:E6:6B:28:C8:57:04:AA:81:C3:0F:E5:77:F3:97:BE:6E:39:E4:2E:C6"
+				},
+				{
+					"algorithm": "sha-512",
+					"value": "60:07:9C:91:F0:73:B2:99:13:2A:0B:EE:1F:3A:EF:94:E9:95:C7:0D:D4:D7:98:47:7F:16:7B:92:56:43:7C:22:09:D1:24:AC:B4:73:07:86:E7:78:6C:D0:76:4B:FC:11:E2:AC:1E:20:24:E5:1B:7E:E6:E0:75:99:09:74:FD:63"
+				},
+				{
+					"algorithm": "sha-256",
+					"value": "A3:F7:BB:31:88:22:9A:CF:FF:5B:46:0E:6B:AA:DB:D9:EF:B4:8A:89:10:61:A3:CA:6D:B8:B5:D3:83:35:EC:8A"
+				},
+				{
+					"algorithm": "sha-1",
+					"value": "CF:87:81:19:06:59:D3:EE:66:3B:8E:75:45:8C:B7:A1:89:59:CC:6E"
+				}
+			],
+			"role": "auto"
+		},
+		"sctpParameters": {
+			"MIS": 1024,
+			"OS": 1024,
+			"isDataChannel": true,
+			"maxMessageSize": 262144,
+			"port": 5000,
+			"sctpBufferedAmount": 0,
+			"sendBufferSize": 262144
+		}
+	}
+}
+
+
+// consume
+// port 57080
+{
+	"response": true,
+	"id": 4671911,
+	"ok": true,
+	"data": {
+		"id": "6a0c1382-7c6b-47ad-81c1-4487e8c3e753",
+		"iceParameters": {
+			"iceLite": true,
+			"password": "v2nc5sc035k31qsig34hm9ttkapcy7h7",
+			"usernameFragment": "pglen2qq5ba9vsaoydm74f7zeczykt75"
+		},
+		"iceCandidates": [
+			{
+				"foundation": "udpcandidate",
+				"ip": "192.168.102.62",
+				"port": 44444,
+				"priority": 1076302079,
+				"protocol": "udp",
+				"type": "host"
+			}
+		],
+		"dtlsParameters": {
+			"fingerprints": [
+				{
+					"algorithm": "sha-224",
+					"value": "63:3F:1B:A6:37:3D:72:A6:26:AB:B7:C8:2E:1F:E4:99:A9:9C:87:44:A9:15:84:D6:8F:57:59:84"
+				},
+				{
+					"algorithm": "sha-384",
+					"value": "CF:7F:92:97:56:9B:D7:03:D8:E0:C0:9A:8A:4E:CB:82:30:92:5E:BE:98:9B:E5:7F:16:90:D8:FA:E6:6B:28:C8:57:04:AA:81:C3:0F:E5:77:F3:97:BE:6E:39:E4:2E:C6"
+				},
+				{
+					"algorithm": "sha-512",
+					"value": "60:07:9C:91:F0:73:B2:99:13:2A:0B:EE:1F:3A:EF:94:E9:95:C7:0D:D4:D7:98:47:7F:16:7B:92:56:43:7C:22:09:D1:24:AC:B4:73:07:86:E7:78:6C:D0:76:4B:FC:11:E2:AC:1E:20:24:E5:1B:7E:E6:E0:75:99:09:74:FD:63"
+				},
+				{
+					"algorithm": "sha-256",
+					"value": "A3:F7:BB:31:88:22:9A:CF:FF:5B:46:0E:6B:AA:DB:D9:EF:B4:8A:89:10:61:A3:CA:6D:B8:B5:D3:83:35:EC:8A"
+				},
+				{
+					"algorithm": "sha-1",
+					"value": "CF:87:81:19:06:59:D3:EE:66:3B:8E:75:45:8C:B7:A1:89:59:CC:6E"
+				}
+			],
+			"role": "auto"
+		},
+		"sctpParameters": {
+			"MIS": 1024,
+			"OS": 1024,
+			"isDataChannel": true,
+			"maxMessageSize": 262144,
+			"port": 5000,
+			"sctpBufferedAmount": 0,
+			"sendBufferSize": 262144
+		}
+	}
+}
+
+
+
+// 77 秒 newConsumer， 服务端通知客户端
+// 会告知ssrc和pt
+{
+	"request": true,
+	"id": 8805644,
+	"method": "newConsumer",
+	"data": {
+		"peerId": "p7o1wjol",
+		"producerId": "5edcf519-5dd7-43ab-9a43-8f94ab2a4e8b",
+		"id": "7c0247a8-3753-4ba6-86d3-6f50ce275ff4",
+		"kind": "audio",
+		"rtpParameters": {
+			"codecs": [
+				{
+					"mimeType": "audio/opus",
+					"payloadType": 100,
+					"clockRate": 48000,
+					"channels": 2,
+					"parameters": {
+						"minptime": 10,
+						"useinbandfec": 1,
+						"sprop-stereo": 1,
+						"usedtx": 1
+					},
+					"rtcpFeedback": [
+						{
+							"type": "nack",
+							"parameter": ""
+						}
+					]
+				}
+			],
+			"headerExtensions": [
+				{
+					"uri": "urn:ietf:params:rtp-hdrext:sdes:mid",
+					"id": 1,
+					"encrypt": false,
+					"parameters": {}
+				},
+				{
+					"uri": "http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time",
+					"id": 4,
+					"encrypt": false,
+					"parameters": {}
+				},
+				{
+					"uri": "urn:ietf:params:rtp-hdrext:ssrc-audio-level",
+					"id": 10,
+					"encrypt": false,
+					"parameters": {}
+				}
+			],
+			"encodings": [
+				{
+					"ssrc": 687419622
+				}
+			],
+			"rtcp": {
+				"cname": "QbnwjTpVWsPpwWO0",
+				"reducedSize": true,
+				"mux": true
+			},
+			"mid": "0"
+		},
+		"type": "simple",
+		"appData": {
+			"peerId": "p7o1wjol"
+		},
+		"producerPaused": false
+	}
+}
+
+
+{
+	"request": true,
+	"id": 1014029,
+	"method": "newConsumer",
+	"data": {
+		"peerId": "p7o1wjol",
+		"producerId": "7c284082-26af-4b5d-b314-cb1f0e91ea99",
+		"id": "8a2bdcee-e181-4d7b-90f5-c5fac6f53099",
+		"kind": "video",
+		"rtpParameters": {
+			"codecs": [
+				{
+					"mimeType": "video/H264",
+					"payloadType": 101,
+					"clockRate": 90000,
+					"parameters": {
+						"level-asymmetry-allowed": 1,
+						"packetization-mode": 1,
+						"profile-level-id": "4d001f"
+					},
+					"rtcpFeedback": [
+						{
+							"type": "transport-cc",
+							"parameter": ""
+						},
+						{
+							"type": "ccm",
+							"parameter": "fir"
+						},
+						{
+							"type": "nack",
+							"parameter": ""
+						},
+						{
+							"type": "nack",
+							"parameter": "pli"
+						}
+					]
+				},
+				{
+					"mimeType": "video/rtx",
+					"payloadType": 102,
+					"clockRate": 90000,
+					"parameters": {
+						"apt": 101
+					},
+					"rtcpFeedback": []
+				}
+			],
+			"headerExtensions": [
+				{
+					"uri": "urn:ietf:params:rtp-hdrext:sdes:mid",
+					"id": 1,
+					"encrypt": false,
+					"parameters": {}
+				},
+				{
+					"uri": "http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time",
+					"id": 4,
+					"encrypt": false,
+					"parameters": {}
+				},
+				{
+					"uri": "http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01",
+					"id": 5,
+					"encrypt": false,
+					"parameters": {}
+				},
+				{
+					"uri": "urn:3gpp:video-orientation",
+					"id": 11,
+					"encrypt": false,
+					"parameters": {}
+				},
+				{
+					"uri": "urn:ietf:params:rtp-hdrext:toffset",
+					"id": 12,
+					"encrypt": false,
+					"parameters": {}
+				}
+			],
+			"encodings": [
+				{
+					"ssrc": 966840732,
+					"rtx": {
+						"ssrc": 966840733
+					},
+					"scalabilityMode": "L3T3",
+					"maxBitrate": 5000000
+				}
+			],
+			"rtcp": {
+				"cname": "QbnwjTpVWsPpwWO0",
+				"reducedSize": true,
+				"mux": true
+			},
+			"mid": "1"
+		},
+		"type": "simulcast",
+		"appData": {
+			"peerId": "p7o1wjol"
+		},
+		"producerPaused": false
+	}
+}

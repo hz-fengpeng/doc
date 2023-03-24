@@ -1,0 +1,68 @@
+﻿  remb_sender.c
+  remb_receiver.c
+  pace_sender.c
+  pacer_queue.c
+  interval_budget.c
+  alr_detector.c
+  trendline.c
+c:\users\fengpeng\desktop\razor-master\estimator\trendline.c(82): warning C4018: “>=”: 有符号/无符号不匹配
+  sender_history.c
+  sender_bandwidth_estimator.c
+  remote_estimator_proxy.c
+  remote_bitrate_estimator.c
+  rate_stat.c
+  overuse_detector.c
+  kalman_filter.c
+  inter_arrival.c
+  cc_feedback_adapter.c
+  estimator_common.c
+  delay_base_bwe.c
+c:\users\fengpeng\desktop\razor-master\estimator\delay_base_bwe.c(96): warning C4244: “函数”: 从“int64_t”转换到“double”，可能丢失数据
+  cc_loss_stat.c
+  bitrate_controller.c
+  正在生成代码...
+  正在编译...
+  aimd_rate_control.c
+c:\users\fengpeng\desktop\razor-master\estimator\aimd_rate_control.c(191): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+  ack_bitrate_estimator.c
+  mscc.c
+c:\users\fengpeng\desktop\razor-master\common\platform\windows\mscc.c(326): warning C4244: “初始化”: 从“uint64_t”转换到“long”，可能丢失数据
+  cf_unwrapper.c
+  cf_stream.c
+  cf_skiplist.c
+  cf_list.c
+  cf_hex.c
+  cf_crc32.c
+  sender_congestion_controller.c
+  receiver_congestion_controller.c
+  razor_log.c
+  razor_api.c
+  windowed_filter.c
+  bbr_sender.c
+c:\users\fengpeng\desktop\razor-master\bbr\bbr_sender.c(80): warning C4244: “=”: 从“int64_t”转换到“uint32_t”，可能丢失数据
+c:\users\fengpeng\desktop\razor-master\bbr\bbr_sender.c(81): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\fengpeng\desktop\razor-master\bbr\bbr_sender.c(88): warning C4244: “=”: 从“double”转换到“uint32_t”，可能丢失数据
+  bbr_rtt_stats.c
+c:\users\fengpeng\desktop\razor-master\bbr\bbr_rtt_stats.c(49): warning C4244: “=”: 从“double”转换到“int64_t”，可能丢失数据
+c:\users\fengpeng\desktop\razor-master\bbr\bbr_rtt_stats.c(50): warning C4244: “=”: 从“double”转换到“int64_t”，可能丢失数据
+  bbr_receiver.c
+  bbr_pacer.c
+c:\users\fengpeng\desktop\razor-master\bbr\bbr_pacer.c(52): warning C4244: “=”: 从“float”转换到“uint32_t”，可能丢失数据
+c:\users\fengpeng\desktop\razor-master\bbr\bbr_pacer.c(59): warning C4244: “=”: 从“float”转换到“uint32_t”，可能丢失数据
+c:\users\fengpeng\desktop\razor-master\bbr\bbr_pacer.c(65): warning C4244: “=”: 从“float”转换到“uint32_t”，可能丢失数据
+  bbr_loss_rate_filter.c
+  bbr_feedback_adpater.c
+  正在生成代码...
+  正在编译...
+  bbr_controller.c
+c:\users\fengpeng\desktop\razor-master\bbr\bbr_controller.c(188): warning C4244: “=”: 从“int64_t”转换到“int32_t”，可能丢失数据
+c:\users\fengpeng\desktop\razor-master\bbr\bbr_controller.c(213): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+c:\users\fengpeng\desktop\razor-master\bbr\bbr_controller.c(222): warning C4244: “=”: 从“int64_t”转换到“size_t”，可能丢失数据
+c:\users\fengpeng\desktop\razor-master\bbr\bbr_controller.c(307): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\fengpeng\desktop\razor-master\bbr\bbr_controller.c(708): warning C4244: “=”: 从“int64_t”转换到“int32_t”，可能丢失数据
+c:\users\fengpeng\desktop\razor-master\bbr\bbr_controller.c(736): warning C4244: “=”: 从“int64_t”转换到“int32_t”，可能丢失数据
+c:\users\fengpeng\desktop\razor-master\bbr\bbr_controller.c(815): warning C4018: “>=”: 有符号/无符号不匹配
+  bbr_common.c
+  bbr_bandwidth_sample.c
+  正在生成代码...
+  razor.vcxproj -> C:\Users\FengPeng\Desktop\razor-master\sim_test\echo\Debug\razor.lib
