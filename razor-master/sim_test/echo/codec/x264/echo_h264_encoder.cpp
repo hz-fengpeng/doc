@@ -158,6 +158,8 @@ void H264Encoder::config_param()
 	en_param_.analyse.inter = X264_ANALYSE_I8x8 | X264_ANALYSE_I4x4;
 }
 
+FILE* encoderFile = NULL;
+
 bool H264Encoder::encode(uint8_t *in, int in_size, enum PixelFormat src_pix_fmt, uint8_t *out, int *out_size, int *frame_type, bool request_keyframe)
 {
 	bool ret = false;
@@ -191,6 +193,11 @@ bool H264Encoder::encode(uint8_t *in, int in_size, enum PixelFormat src_pix_fmt,
 	if (rc > 0){
 		*out_size = rc;
 		memcpy(out, nal[0].p_payload, rc);
+		if (encoderFile == NULL) 			{
+			encoderFile = fopen("encoderOut.bin", "wb");
+		}
+		fwrite(out, rc, 1, encoderFile);
+		fflush(encoderFile);
 
 		/*如果是intra_refresh方式，将每一帧都设置成关键帧来适应sim transport的缓冲buffer*/
 		if (en_param_.b_intra_refresh == 1)
